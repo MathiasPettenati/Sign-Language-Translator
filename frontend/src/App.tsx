@@ -1,16 +1,25 @@
-import { Database, HandHeart, Radio } from "lucide-react";
+import { BookOpen, Database, HandHeart, Radio } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { DEFAULT_RECOGNITION_SETTINGS, LOCAL_STORAGE_KEYS } from "./constants/vocabulary";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { DatasetCollectorPage } from "./pages/DatasetCollectorPage";
 import { RecognizerPage } from "./pages/RecognizerPage";
+import { VocabularyPage } from "./pages/VocabularyPage";
 import { isRecognitionSettings } from "./utils/guards";
 
-type Page = "recognizer" | "collector";
+type Page = "recognizer" | "vocabulary" | "collector";
 
 function getPageFromHash(): Page {
-  return window.location.hash === "#collector" ? "collector" : "recognizer";
+  if (window.location.hash === "#collector") {
+    return "collector";
+  }
+
+  if (window.location.hash === "#vocabulary") {
+    return "vocabulary";
+  }
+
+  return "recognizer";
 }
 
 export function App() {
@@ -33,7 +42,8 @@ export function App() {
   }, [settings.darkMode, settings.reducedMotion]);
 
   const navigate = (nextPage: Page) => {
-    window.location.hash = nextPage === "collector" ? "collector" : "";
+    window.location.hash =
+      nextPage === "collector" ? "collector" : nextPage === "vocabulary" ? "vocabulary" : "";
     setPage(nextPage);
   };
 
@@ -67,6 +77,14 @@ export function App() {
               <Database className="h-4 w-4" aria-hidden="true" />
               Dataset
             </button>
+            <button
+              type="button"
+              onClick={() => navigate("vocabulary")}
+              className={`nav-button ${page === "vocabulary" ? "active" : ""}`}
+            >
+              <BookOpen className="h-4 w-4" aria-hidden="true" />
+              Words
+            </button>
           </nav>
         </div>
       </header>
@@ -74,8 +92,10 @@ export function App() {
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         {page === "recognizer" ? (
           <RecognizerPage settings={settings} onSettingsChange={setSettings} />
-        ) : (
+        ) : page === "collector" ? (
           <DatasetCollectorPage settings={settings} />
+        ) : (
+          <VocabularyPage />
         )}
       </div>
     </div>

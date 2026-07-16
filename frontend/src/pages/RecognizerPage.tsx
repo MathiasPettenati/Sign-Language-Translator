@@ -1,4 +1,4 @@
-import { Info, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 
 import { CameraStage } from "../components/CameraStage";
 import { ConfidenceMeter } from "../components/ConfidenceMeter";
@@ -8,7 +8,7 @@ import { ModelStatus } from "../components/ModelStatus";
 import { SentenceBuilder } from "../components/SentenceBuilder";
 import { SettingsPanel } from "../components/SettingsPanel";
 import { StatusPill } from "../components/StatusPill";
-import { APP_NAME, PROTOTYPE_RULE_LABELS } from "../constants/vocabulary";
+import { APP_NAME } from "../constants/vocabulary";
 import { useRecognizer } from "../hooks/useRecognizer";
 import type { RecognitionSettings } from "../types/recognition";
 
@@ -85,23 +85,6 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
                 threshold={settings.confidenceThreshold}
                 label="Recognition confidence"
               />
-            </div>
-          </section>
-
-          <section className="surface p-4">
-            <div className="flex items-center gap-2 text-sm font-medium text-ink-950 dark:text-white">
-              <Info className="h-4 w-4" aria-hidden="true" />
-              Prototype Static Labels
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {PROTOTYPE_RULE_LABELS.map((label) => (
-                <span
-                  key={label}
-                  className="chip"
-                >
-                  {label}
-                </span>
-              ))}
             </div>
           </section>
 

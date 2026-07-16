@@ -22,4 +22,15 @@ describe("App", () => {
     expect(screen.getByText("Dataset Collector")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /export dataset/i })).toBeInTheDocument();
   });
+
+  it("shows the vocabulary database in the words tab", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /words/i }));
+
+    expect(screen.getByText("Vocabulary database")).toBeInTheDocument();
+    expect(screen.getByText("Hello")).toBeInTheDocument();
+    expect(screen.getByText("Thank you")).toBeInTheDocument();
+  });
 });

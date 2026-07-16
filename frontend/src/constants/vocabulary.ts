@@ -42,6 +42,8 @@ export const PROTOTYPE_RULE_LABELS = [
   "Y",
 ] as const;
 
+const PROTOTYPE_RULE_LABEL_SET = new Set<string>(PROTOTYPE_RULE_LABELS);
+
 export const NONE_LABEL = "none";
 
 export const DATASET_LABELS = [
@@ -49,6 +51,32 @@ export const DATASET_LABELS = [
   ...TARGET_VOCABULARY,
   ...FINGERSPELLING_LABELS,
 ] as const;
+
+export type VocabularyCategory = "isolated-sign" | "fingerspelling" | "neutral";
+
+export type VocabularyEntry = {
+  label: string;
+  category: VocabularyCategory;
+  prototypeAvailable: boolean;
+};
+
+export const VOCABULARY_DATABASE: VocabularyEntry[] = [
+  {
+    label: NONE_LABEL,
+    category: "neutral",
+    prototypeAvailable: false,
+  },
+  ...TARGET_VOCABULARY.map((label) => ({
+    label,
+    category: "isolated-sign" as const,
+    prototypeAvailable: PROTOTYPE_RULE_LABEL_SET.has(label),
+  })),
+  ...FINGERSPELLING_LABELS.map((label) => ({
+    label,
+    category: "fingerspelling" as const,
+    prototypeAvailable: PROTOTYPE_RULE_LABEL_SET.has(label),
+  })),
+];
 
 export const DEFAULT_RECOGNITION_SETTINGS: RecognitionSettings = {
   confidenceThreshold: 0.75,
