@@ -1,0 +1,1008 @@
+import { writeFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const MINIMUM_TARGET_VOCABULARY_SIZE = 1000;
+
+const coreTargetVocabulary = [
+  "Hello",
+  "Goodbye",
+  "Yes",
+  "No",
+  "Please",
+  "Thank you",
+  "Help",
+  "Stop",
+  "More",
+  "Eat",
+  "Drink",
+  "Water",
+  "Bathroom",
+  "Friend",
+  "Love",
+  "I",
+  "You",
+];
+
+const fingerspellingLabels = ["A", "B", "C", "L", "V", "W", "Y"];
+
+const prototypeRuleLabels = [
+  "Yes",
+  "Stop",
+  "Help",
+  "Friend",
+  "Love",
+  "I",
+  "You",
+  "Water",
+  "A",
+  "B",
+  "L",
+  "V",
+  "W",
+  "Y",
+];
+
+const everydayVocabulary = parseVocabulary(`
+About
+Above
+Across
+After
+Again
+All
+Almost
+Already
+Also
+Always
+And
+Any
+Anyone
+Anything
+Around
+Away
+Back
+Bad
+Before
+Behind
+Below
+Between
+Big
+Both
+But
+Can
+Cannot
+Come
+Came
+Coming
+Day
+Different
+Do
+Does
+Did
+Done
+Doing
+Down
+Each
+Early
+Easy
+Enough
+Every
+Everyone
+Everything
+Far
+Fast
+Few
+First
+For
+From
+Get
+Got
+Getting
+Give
+Gave
+Given
+Giving
+Good
+Great
+Had
+Has
+Have
+Having
+Here
+How
+If
+In
+Inside
+Into
+Just
+Kind
+Last
+Late
+Later
+Left
+Little
+Long
+Many
+Maybe
+Most
+Near
+Never
+New
+Next
+Now
+Of
+Off
+Often
+Old
+On
+Once
+Only
+Or
+Other
+Out
+Outside
+Over
+Part
+Ready
+Real
+Right
+Same
+Second
+Short
+Should
+Slow
+Small
+So
+Some
+Soon
+Still
+Such
+Sure
+Than
+That
+The
+Then
+There
+These
+They
+Thing
+This
+Those
+Through
+Today
+Together
+Tomorrow
+Too
+Under
+Until
+Up
+Very
+Was
+Were
+Way
+We
+Well
+What
+When
+Where
+Which
+Who
+Why
+Will
+With
+Would
+Yesterday
+Yet
+Your
+Yours
+Myself
+Yourself
+Himself
+Herself
+Ourselves
+Themselves
+Mother
+Father
+Parent
+Child
+Baby
+Boy
+Girl
+Brother
+Sister
+Grandmother
+Grandfather
+Grandparent
+Aunt
+Uncle
+Cousin
+Family
+Husband
+Wife
+Partner
+Neighbor
+Person
+People
+Woman
+Man
+Adult
+Teenager
+Student
+Teacher
+Doctor
+Nurse
+Police
+Firefighter
+Worker
+Boss
+Team
+Class
+Group
+Community
+Morning
+Afternoon
+Evening
+Night
+Week
+Weekend
+Month
+Year
+Hour
+Minute
+Past
+Future
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+Sunday
+January
+February
+March
+April
+May
+June
+July
+August
+September
+October
+November
+December
+Birthday
+Holiday
+Summer
+Autumn
+Winter
+Spring
+Season
+Calendar
+Schedule
+Home
+House
+Apartment
+Room
+Kitchen
+Bedroom
+Living Room
+Door
+Window
+Floor
+Wall
+Table
+Chair
+Bed
+School
+Classroom
+Library
+Office
+Store
+Market
+Bank
+Hospital
+Clinic
+Park
+Playground
+Restaurant
+Cafe
+Church
+Temple
+Mosque
+Airport
+Station
+Street
+Road
+City
+Town
+Country
+Farm
+Beach
+Mountain
+River
+Lake
+Forest
+Garden
+Yard
+Breakfast
+Lunch
+Dinner
+Snack
+Food
+Meal
+Bread
+Rice
+Pasta
+Soup
+Salad
+Sandwich
+Pizza
+Chicken
+Beef
+Fish
+Egg
+Cheese
+Milk
+Juice
+Coffee
+Tea
+Apple
+Banana
+Orange
+Grape
+Strawberry
+Potato
+Tomato
+Carrot
+Corn
+Bean
+Pea
+Sugar
+Salt
+Pepper
+Sauce
+Cookie
+Cake
+Ice Cream
+Candy
+Shirt
+Pants
+Dress
+Skirt
+Coat
+Jacket
+Sweater
+Shoes
+Socks
+Hat
+Gloves
+Scarf
+Glasses
+Bag
+Backpack
+Wallet
+Key
+Phone
+Computer
+Book
+Paper
+Pen
+Pencil
+Body
+Head
+Face
+Hair
+Eye
+Ear
+Nose
+Mouth
+Tooth
+Neck
+Shoulder
+Arm
+Elbow
+Hand
+Finger
+Thumb
+Leg
+Knee
+Foot
+Toe
+Heart
+Stomach
+Skin
+Blood
+Happy
+Sad
+Angry
+Afraid
+Scared
+Worried
+Tired
+Sick
+Hurt
+Pain
+Fine
+Better
+Best
+Okay
+Sorry
+Excited
+Calm
+Proud
+Lonely
+Bored
+Confused
+Hungry
+Thirsty
+Hot
+Cold
+Warm
+Cool
+Clean
+Dirty
+Safe
+Dangerous
+Important
+Busy
+Free
+Quiet
+Loud
+Red
+Blue
+Green
+Yellow
+Black
+White
+Brown
+Gray
+Pink
+Purple
+Color
+Light
+Dark
+Number
+Zero
+One
+Two
+Three
+Four
+Five
+Six
+Seven
+Eight
+Nine
+Ten
+Eleven
+Twelve
+Thirteen
+Fourteen
+Fifteen
+Sixteen
+Seventeen
+Eighteen
+Nineteen
+Twenty
+Thirty
+Forty
+Fifty
+Hundred
+Thousand
+Dog
+Cat
+Bird
+Horse
+Cow
+Pig
+Sheep
+Goat
+Duck
+Mouse
+Bear
+Lion
+Tiger
+Monkey
+Elephant
+Giraffe
+Snake
+Frog
+Turtle
+Insect
+Bee
+Butterfly
+Tree
+Flower
+Grass
+Leaf
+Seed
+Sun
+Moon
+Star
+Sky
+Cloud
+Rain
+Snow
+Wind
+Storm
+Fire
+Earth
+Air
+Math
+Science
+History
+Art
+Music
+Language
+English
+Spanish
+Sign Language
+Lesson
+Homework
+Test
+Grade
+Project
+Question
+Answer
+Idea
+Problem
+Solution
+Rule
+Name
+Letter
+Word
+Sentence
+Story
+Picture
+Game
+Toy
+Sport
+Soccer
+Basketball
+Baseball
+Tennis
+Swimming
+Dance
+Movie
+Television
+Radio
+Internet
+Email
+Message
+Password
+Website
+App
+Camera
+Video
+Photo
+Go
+Goes
+Went
+Gone
+Going
+See
+Saw
+Seen
+Seeing
+Say
+Said
+Saying
+Tell
+Told
+Telling
+Make
+Made
+Making
+Take
+Took
+Taken
+Taking
+Ate
+Eating
+Drank
+Drinking
+Read
+Reads
+Reading
+Write
+Wrote
+Written
+Writing
+Buy
+Bought
+Buying
+Bring
+Brought
+Bringing
+Think
+Thought
+Thinking
+Know
+Knew
+Known
+Knowing
+Teach
+Taught
+Teaching
+Find
+Found
+Finding
+Feel
+Felt
+Feeling
+Leave
+Leaving
+Meet
+Met
+Meeting
+Send
+Sent
+Sending
+Sleep
+Slept
+Sleeping
+Speak
+Spoke
+Spoken
+Speaking
+Stand
+Stood
+Standing
+Sit
+Sat
+Sitting
+Run
+Ran
+Running
+Swim
+Swam
+Cut
+Cutting
+Put
+Putting
+North
+South
+East
+West
+Front
+Middle
+Center
+Side
+Top
+Bottom
+Start
+End
+Finish
+Less
+Full
+Empty
+Heavy
+Hard
+Soft
+Strong
+Weak
+Young
+Tall
+Low
+High
+Deep
+Wide
+Narrow
+Close
+Pretty
+Ugly
+`);
+
+const regularVerbRoots = parseVocabulary(`
+Accept
+Add
+Admire
+Advise
+Agree
+Allow
+Answer
+Apologize
+Appear
+Arrange
+Arrive
+Ask
+Avoid
+Bake
+Balance
+Believe
+Bless
+Boil
+Borrow
+Brush
+Button
+Call
+Care
+Carry
+Celebrate
+Change
+Charge
+Chase
+Check
+Cheer
+Chew
+Circle
+Clean
+Climb
+Close
+Collect
+Color
+Comb
+Compare
+Complain
+Complete
+Connect
+Consider
+Continue
+Cook
+Cough
+Count
+Cover
+Create
+Cross
+Cry
+Dance
+Decide
+Decorate
+Deliver
+Depend
+Describe
+Design
+Develop
+Disagree
+Discover
+Discuss
+Divide
+Dream
+Dress
+Dry
+Earn
+Enjoy
+Enter
+Escape
+Exercise
+Explain
+Explore
+Face
+Fail
+Finish
+Fold
+Follow
+Gather
+Greet
+Guess
+Guide
+Handle
+Happen
+Help
+Hope
+Hurry
+Imagine
+Improve
+Include
+Increase
+Introduce
+Invent
+Invite
+Join
+Joke
+Jump
+Label
+Land
+Laugh
+Learn
+Listen
+Live
+Lock
+Look
+Manage
+Marry
+Match
+Measure
+Mention
+Miss
+Mix
+Name
+Need
+Notice
+Offer
+Open
+Order
+Organize
+Paint
+Park
+Pass
+Peel
+Phone
+Plant
+Play
+Point
+Polish
+Pour
+Practice
+Prepare
+Present
+Promise
+Pronounce
+Protect
+Provide
+Pull
+Push
+Question
+Raise
+Reach
+Realize
+Receive
+Record
+Reduce
+Refuse
+Relax
+Remember
+Remove
+Repair
+Repeat
+Replace
+Report
+Request
+Respect
+Rest
+Return
+Review
+Save
+Search
+Select
+Separate
+Share
+Shave
+Shout
+Shower
+Sign
+Skate
+Ski
+Smile
+Sneeze
+Solve
+Spell
+Squeeze
+Stay
+Study
+Suggest
+Support
+Surprise
+Talk
+Taste
+Thank
+Tidy
+Touch
+Trace
+Trade
+Train
+Translate
+Travel
+Trust
+Try
+Turn
+Unlock
+Unpack
+Use
+Visit
+Volunteer
+Vote
+Wait
+Walk
+Want
+Warn
+Wash
+Watch
+Wave
+Welcome
+Whisper
+Wipe
+Wish
+Work
+Worry
+Yell
+`);
+
+function parseVocabulary(source) {
+  return source
+    .split(/\r?\n/)
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+}
+
+function titleCaseWord(word) {
+  return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`;
+}
+
+function hasConsonantYEnding(word) {
+  return /[^aeiou]y$/i.test(word);
+}
+
+function thirdPerson(root) {
+  const lower = root.toLowerCase();
+
+  if (hasConsonantYEnding(lower)) {
+    return titleCaseWord(`${lower.slice(0, -1)}ies`);
+  }
+
+  if (/(s|x|z|ch|sh|o)$/i.test(lower)) {
+    return titleCaseWord(`${lower}es`);
+  }
+
+  return titleCaseWord(`${lower}s`);
+}
+
+function pastTense(root) {
+  const lower = root.toLowerCase();
+
+  if (hasConsonantYEnding(lower)) {
+    return titleCaseWord(`${lower.slice(0, -1)}ied`);
+  }
+
+  if (lower.endsWith("e")) {
+    return titleCaseWord(`${lower}d`);
+  }
+
+  return titleCaseWord(`${lower}ed`);
+}
+
+function gerund(root) {
+  const lower = root.toLowerCase();
+
+  if (lower.endsWith("ie")) {
+    return titleCaseWord(`${lower.slice(0, -2)}ying`);
+  }
+
+  if (lower.endsWith("e") && !lower.endsWith("ee")) {
+    return titleCaseWord(`${lower.slice(0, -1)}ing`);
+  }
+
+  return titleCaseWord(`${lower}ing`);
+}
+
+function buildVerbForms(root) {
+  return [root, thirdPerson(root), pastTense(root), gerund(root)];
+}
+
+function unique(entries) {
+  return Array.from(new Set(entries));
+}
+
+const targetVocabulary = unique([
+  ...coreTargetVocabulary,
+  ...everydayVocabulary,
+  ...regularVerbRoots.flatMap(buildVerbForms),
+]);
+
+if (targetVocabulary.length < MINIMUM_TARGET_VOCABULARY_SIZE) {
+  throw new Error(
+    `Expected at least ${MINIMUM_TARGET_VOCABULARY_SIZE} words, generated ${targetVocabulary.length}.`,
+  );
+}
+
+const labelPayload = {
+  version: "0.1.0",
+  mode: "isolated-sign-mvp",
+  labels: ["none", ...targetVocabulary, ...fingerspellingLabels],
+  prototypeRuleLabels,
+  notes:
+    "The shipped MVP includes a rule-based static prototype for a subset of labels. The full vocabulary is available for dataset collection and custom model training.",
+};
+
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const frontendDir = path.resolve(scriptDir, "..");
+
+await writeFile(
+  path.join(frontendDir, "src", "constants", "targetVocabulary.json"),
+  `${JSON.stringify(targetVocabulary, null, 2)}\n`,
+);
+await writeFile(
+  path.join(frontendDir, "public", "models", "labels.json"),
+  `${JSON.stringify(labelPayload, null, 2)}\n`,
+);
+
+console.log(`Generated ${targetVocabulary.length} target words and ${labelPayload.labels.length} dataset labels.`);

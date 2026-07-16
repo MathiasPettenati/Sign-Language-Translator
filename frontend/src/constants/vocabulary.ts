@@ -1,27 +1,10 @@
 import type { RecognitionSettings } from "../types/recognition";
+import targetVocabulary from "./targetVocabulary.json";
 
 export const APP_NAME = "Handspeak MVP";
 export const APP_VERSION = "0.1.0";
 
-export const TARGET_VOCABULARY = [
-  "Hello",
-  "Goodbye",
-  "Yes",
-  "No",
-  "Please",
-  "Thank you",
-  "Help",
-  "Stop",
-  "More",
-  "Eat",
-  "Drink",
-  "Water",
-  "Bathroom",
-  "Friend",
-  "Love",
-  "I",
-  "You",
-] as const;
+export const TARGET_VOCABULARY: readonly string[] = targetVocabulary;
 
 export const FINGERSPELLING_LABELS = ["A", "B", "C", "L", "V", "W", "Y"] as const;
 
@@ -46,11 +29,11 @@ const PROTOTYPE_RULE_LABEL_SET = new Set<string>(PROTOTYPE_RULE_LABELS);
 
 export const NONE_LABEL = "none";
 
-export const DATASET_LABELS = [
+export const DATASET_LABELS: readonly string[] = [
   NONE_LABEL,
   ...TARGET_VOCABULARY,
   ...FINGERSPELLING_LABELS,
-] as const;
+];
 
 export type VocabularyCategory = "isolated-sign" | "fingerspelling" | "neutral";
 
