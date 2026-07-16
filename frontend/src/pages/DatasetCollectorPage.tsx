@@ -108,11 +108,9 @@ export function DatasetCollectorPage({ settings }: DatasetCollectorPageProps) {
 
   return (
     <main className="space-y-6">
-      <section className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
-        <p className="text-sm font-semibold uppercase tracking-wide text-signal-blue">
-          Training data collection
-        </p>
-        <h1 className="mt-1 text-3xl font-bold text-ink-950 dark:text-white">Dataset Collector</h1>
+      <section className="surface p-4">
+        <p className="eyebrow">Training data collection</p>
+        <h1 className="mt-1 text-3xl font-semibold text-ink-950 dark:text-white">Dataset Collector</h1>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-ink-600 dark:text-ink-300">
           Capture labeled landmark samples for isolated signs. Keep every recording session in a
           single split so validation and test results are not inflated by near-duplicate frames.
@@ -133,8 +131,8 @@ export function DatasetCollectorPage({ settings }: DatasetCollectorPageProps) {
           onStop={tracker.stop}
         />
 
-        <aside className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
-          <h2 className="text-base font-semibold text-ink-950 dark:text-white">Capture Controls</h2>
+        <aside className="surface p-4">
+          <h2 className="section-title">Capture Controls</h2>
           <div className="mt-4 space-y-4">
             <label className="field-label">
               <span>Sign label</span>
@@ -204,7 +202,7 @@ export function DatasetCollectorPage({ settings }: DatasetCollectorPageProps) {
                 Export Dataset
               </button>
             </div>
-            <p className="rounded-md bg-ink-50 p-3 text-sm text-ink-700 dark:bg-ink-950 dark:text-ink-200">
+            <p className="surface-muted p-3 text-sm text-ink-700 dark:text-ink-200">
               {statusMessage}
             </p>
           </div>
@@ -212,10 +210,10 @@ export function DatasetCollectorPage({ settings }: DatasetCollectorPageProps) {
       </section>
 
       <section className="grid gap-4 xl:grid-cols-[380px_1fr]">
-        <div className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
-          <h2 className="text-base font-semibold text-ink-950 dark:text-white">Sample Counts</h2>
+        <div className="surface p-4">
+          <h2 className="section-title">Sample Counts</h2>
           {sampleCounts.length === 0 ? (
-            <p className="mt-4 rounded-md bg-ink-50 p-3 text-sm text-ink-600 dark:bg-ink-950 dark:text-ink-300">
+            <p className="surface-muted mt-4 p-3 text-sm text-ink-600 dark:text-ink-300">
               No stored samples.
             </p>
           ) : (
@@ -248,10 +246,10 @@ export function DatasetCollectorPage({ settings }: DatasetCollectorPageProps) {
           )}
         </div>
 
-        <div className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
-          <h2 className="text-base font-semibold text-ink-950 dark:text-white">Recent Samples</h2>
+        <div className="surface p-4">
+          <h2 className="section-title">Recent Samples</h2>
           {samples.length === 0 ? (
-            <p className="mt-4 rounded-md bg-ink-50 p-3 text-sm text-ink-600 dark:bg-ink-950 dark:text-ink-300">
+            <p className="surface-muted mt-4 p-3 text-sm text-ink-600 dark:text-ink-300">
               Captured samples will appear here.
             </p>
           ) : (
@@ -259,14 +257,14 @@ export function DatasetCollectorPage({ settings }: DatasetCollectorPageProps) {
               {samples.slice(0, 80).map((sample) => (
                 <li
                   key={sample.id}
-                  className="grid gap-3 rounded-md bg-ink-50 p-3 text-sm dark:bg-ink-950 sm:grid-cols-[1fr_auto]"
+                  className="list-row grid gap-3 p-3 text-sm sm:grid-cols-[1fr_auto]"
                 >
                   <div>
                     <p className="font-semibold text-ink-950 dark:text-white">
-                      {sample.label} · {sample.split}
+                      {sample.label} - {sample.split}
                     </p>
                     <p className="text-ink-600 dark:text-ink-300">
-                      {sample.participantId} · {sample.sessionId} · {sample.hands.length} hand(s)
+                      {sample.participantId} - {sample.sessionId} - {sample.hands.length} hand(s)
                     </p>
                     <time className="text-xs text-ink-500 dark:text-ink-400" dateTime={sample.createdAt}>
                       {new Date(sample.createdAt).toLocaleString()}

@@ -14,13 +14,13 @@ function stateText(value: string): string {
 
 export function ModelStatus({ state, handsDetected, warnings }: ModelStatusProps) {
   return (
-    <section className="grid gap-3 rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
-      <div className="flex items-center gap-2 text-sm font-semibold text-ink-900 dark:text-white">
+    <section className="surface grid gap-3 p-4">
+      <div className="flex items-center gap-2 text-sm font-medium text-ink-900 dark:text-white">
         <Cpu className="h-4 w-4" aria-hidden="true" />
         Model Status
       </div>
       <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
-        <div className="rounded-md bg-ink-50 p-3 dark:bg-ink-950">
+        <div className="stat-card">
           <div className="flex items-center gap-2 text-ink-500 dark:text-ink-400">
             <Hand className="h-4 w-4" aria-hidden="true" />
             Hand landmarks
@@ -29,7 +29,7 @@ export function ModelStatus({ state, handsDetected, warnings }: ModelStatusProps
             {stateText(state.handLandmarker)}
           </p>
         </div>
-        <div className="rounded-md bg-ink-50 p-3 dark:bg-ink-950">
+        <div className="stat-card">
           <div className="flex items-center gap-2 text-ink-500 dark:text-ink-400">
             <Boxes className="h-4 w-4" aria-hidden="true" />
             Gesture model
@@ -38,7 +38,7 @@ export function ModelStatus({ state, handsDetected, warnings }: ModelStatusProps
             {stateText(state.gestureRecognizer)}
           </p>
         </div>
-        <div className="rounded-md bg-ink-50 p-3 dark:bg-ink-950">
+        <div className="stat-card">
           <div className="flex items-center gap-2 text-ink-500 dark:text-ink-400">
             <Hand className="h-4 w-4" aria-hidden="true" />
             Hands detected

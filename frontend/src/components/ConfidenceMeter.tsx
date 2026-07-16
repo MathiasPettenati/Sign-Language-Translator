@@ -17,11 +17,11 @@ export function ConfidenceMeter({ value, threshold, label }: ConfidenceMeterProp
         <span className="tabular-nums text-ink-600 dark:text-ink-300">{percentage}%</span>
       </div>
       <div
-        className="relative h-3 overflow-hidden rounded-full bg-ink-200 dark:bg-ink-800"
+        className="relative h-2 overflow-hidden rounded-full bg-ink-200 dark:bg-ink-800"
         aria-label={`${label}: ${percentage} percent confidence`}
       >
         <div
-          className="h-full rounded-full bg-signal-green transition-[width] duration-200"
+          className="h-full rounded-full bg-signal-blue transition-[width] duration-200"
           style={{ width: `${percentage}%` }}
         />
         <div

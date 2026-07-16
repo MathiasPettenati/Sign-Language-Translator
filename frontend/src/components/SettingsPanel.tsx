@@ -16,15 +16,15 @@ export function SettingsPanel({ settings, onChange }: SettingsPanelProps) {
   };
 
   return (
-    <section className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
+    <section className="surface p-4">
       <div className="flex items-center gap-2">
         <SlidersHorizontal className="h-4 w-4 text-ink-500" aria-hidden="true" />
-        <h2 className="text-base font-semibold text-ink-950 dark:text-white">Settings</h2>
+        <h2 className="section-title">Settings</h2>
       </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <fieldset className="space-y-4">
-          <legend className="flex items-center gap-2 text-sm font-semibold text-ink-800 dark:text-ink-100">
+          <legend className="flex items-center gap-2 text-sm font-medium text-ink-800 dark:text-ink-100">
             <Gauge className="h-4 w-4" aria-hidden="true" />
             Recognition
           </legend>
@@ -120,7 +120,7 @@ export function SettingsPanel({ settings, onChange }: SettingsPanelProps) {
         </fieldset>
 
         <fieldset className="space-y-4">
-          <legend className="flex items-center gap-2 text-sm font-semibold text-ink-800 dark:text-ink-100">
+          <legend className="flex items-center gap-2 text-sm font-medium text-ink-800 dark:text-ink-100">
             <Mic2 className="h-4 w-4" aria-hidden="true" />
             Speech and Display
           </legend>

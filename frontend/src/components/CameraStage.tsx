@@ -23,7 +23,7 @@ export function CameraStage({
   const mirroredClass = mirrored ? "scale-x-[-1]" : "";
 
   return (
-    <section className="overflow-hidden rounded-md border border-ink-200 bg-ink-950 shadow-panel dark:border-ink-800">
+    <section className="surface overflow-hidden bg-ink-950">
       <div className="relative aspect-video min-h-[260px] w-full bg-ink-950">
         <video
           ref={videoRef}
@@ -36,9 +36,9 @@ export function CameraStage({
           aria-label="Hand landmark overlay"
         />
         {!isActive ? (
-          <div className="absolute inset-0 grid place-items-center bg-ink-950/82 p-6 text-center text-white">
+          <div className="absolute inset-0 grid place-items-center bg-ink-950/86 p-6 text-center text-white">
             <div className="max-w-sm space-y-4">
-              <Camera className="mx-auto h-12 w-12 text-white/85" aria-hidden="true" />
+              <Camera className="mx-auto h-10 w-10 text-white/80" aria-hidden="true" />
               <div>
                 <p className="text-lg font-semibold">
                   {isStarting ? "Starting camera" : "Camera inactive"}
@@ -51,7 +51,7 @@ export function CameraStage({
                 type="button"
                 onClick={onStart}
                 disabled={isStarting}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-semibold text-ink-950 transition hover:bg-ink-100 disabled:cursor-not-allowed disabled:opacity-70"
+                className="button-primary border-white bg-white text-ink-950 hover:bg-ink-100"
               >
                 {isStarting ? (
                   <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
@@ -77,7 +77,7 @@ export function CameraStage({
             type="button"
             onClick={onStart}
             disabled={isActive || isStarting}
-            className="inline-flex items-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm font-medium text-white transition-colors hover:border-white/35 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Camera className="h-4 w-4" aria-hidden="true" />
             Start
@@ -86,7 +86,7 @@ export function CameraStage({
             type="button"
             onClick={onStop}
             disabled={!isActive && !isStarting}
-            className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-sm font-semibold text-ink-950 transition hover:bg-ink-100 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-md border border-white bg-white px-3 py-2 text-sm font-medium text-ink-950 transition-colors hover:bg-ink-100 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <CameraOff className="h-4 w-4" aria-hidden="true" />
             Stop

@@ -38,18 +38,16 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-ink-50 text-ink-900 dark:bg-ink-950 dark:text-ink-100">
-      <header className="sticky top-0 z-20 border-b border-ink-200 bg-white/92 backdrop-blur dark:border-ink-800 dark:bg-ink-950/92">
+    <div className="min-h-screen bg-[#f6f7f8] text-ink-900 dark:bg-ink-950 dark:text-ink-100">
+      <header className="sticky top-0 z-20 border-b border-ink-200 bg-[#f6f7f8]/95 backdrop-blur dark:border-ink-800 dark:bg-ink-950/95">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-md bg-ink-950 text-white dark:bg-white dark:text-ink-950">
+            <div className="grid h-9 w-9 place-items-center rounded-md border border-ink-200 bg-white text-ink-900 dark:border-ink-800 dark:bg-ink-900 dark:text-white">
               <HandHeart className="h-5 w-5" aria-hidden="true" />
             </div>
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-ink-500 dark:text-ink-400">
-                Handspeak
-              </p>
-              <p className="font-bold text-ink-950 dark:text-white">Sign to Speech MVP</p>
+              <p className="text-xs font-medium text-ink-500 dark:text-ink-400">Handspeak</p>
+              <p className="text-sm font-semibold text-ink-950 dark:text-white">Sign to Speech MVP</p>
             </div>
           </div>
           <nav className="flex items-center gap-2" aria-label="Main navigation">

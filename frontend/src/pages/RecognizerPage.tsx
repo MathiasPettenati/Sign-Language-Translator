@@ -38,13 +38,11 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
     <main className="space-y-6">
       <section className="grid gap-4 lg:grid-cols-[1fr_360px]">
         <div className="space-y-4">
-          <div className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
+          <div className="surface p-4">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-wide text-signal-blue">
-                  Isolated-sign recognition MVP
-                </p>
-                <h1 className="mt-1 text-3xl font-bold text-ink-950 dark:text-white">{APP_NAME}</h1>
+                <p className="eyebrow">Isolated-sign recognition MVP</p>
+                <h1 className="mt-1 text-3xl font-semibold text-ink-950 dark:text-white">{APP_NAME}</h1>
                 <p className="mt-2 max-w-3xl text-sm leading-6 text-ink-600 dark:text-ink-300">
                   This MVP recognizes selected isolated signs and fingerspelling hand shapes. It is
                   not a complete ASL translator and does not interpret ASL grammar, facial
@@ -68,14 +66,14 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
         </div>
 
         <aside className="space-y-4">
-          <section className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
+          <section className="surface p-4">
             <div className="flex items-center justify-between gap-3">
-              <h2 className="text-base font-semibold text-ink-950 dark:text-white">Current Sign</h2>
-              <span className="rounded-full bg-ink-100 px-2.5 py-1 text-xs font-semibold text-ink-700 dark:bg-ink-800 dark:text-ink-200">
+              <h2 className="section-title">Current Sign</h2>
+              <span className="chip">
                 {recognizer.currentPrediction?.source ?? "waiting"}
               </span>
             </div>
-            <p className="mt-4 text-5xl font-bold leading-none text-ink-950 dark:text-white">
+            <p className="mt-4 text-4xl font-semibold leading-none text-ink-950 dark:text-white sm:text-5xl">
               {visibleSign}
             </p>
             <p className="mt-2 text-sm text-ink-600 dark:text-ink-300">
@@ -90,8 +88,8 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
             </div>
           </section>
 
-          <section className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
-            <div className="flex items-center gap-2 text-sm font-semibold text-ink-950 dark:text-white">
+          <section className="surface p-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-ink-950 dark:text-white">
               <Info className="h-4 w-4" aria-hidden="true" />
               Prototype Static Labels
             </div>
@@ -99,7 +97,7 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
               {PROTOTYPE_RULE_LABELS.map((label) => (
                 <span
                   key={label}
-                  className="rounded-full bg-ink-100 px-2.5 py-1 text-xs font-semibold text-ink-700 dark:bg-ink-800 dark:text-ink-200"
+                  className="chip"
                 >
                   {label}
                 </span>
@@ -107,7 +105,7 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
             </div>
           </section>
 
-          <section className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
+          <section className="surface p-4">
             <div className="flex items-start gap-3">
               <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-signal-green" aria-hidden="true" />
               <div className="text-sm text-ink-600 dark:text-ink-300">

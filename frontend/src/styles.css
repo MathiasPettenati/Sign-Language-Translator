@@ -5,7 +5,12 @@
 :root {
   color-scheme: light;
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    Aptos, Inter, "Segoe UI Variable", "Segoe UI", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  font-feature-settings:
+    "cv02" 1,
+    "cv03" 1,
+    "cv04" 1;
 }
 
 :root.dark {
@@ -14,11 +19,15 @@
 
 * {
   box-sizing: border-box;
+  letter-spacing: 0;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  background: #f6f7f8;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 button,
@@ -46,24 +55,73 @@ textarea:focus-visible {
 }
 
 @layer components {
+  .surface {
+    @apply rounded-lg border border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-900;
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.05);
+  }
+
+  .surface-muted {
+    @apply rounded-md border border-ink-200 bg-ink-50 dark:border-ink-800 dark:bg-ink-950;
+  }
+
+  .section-title {
+    @apply text-base font-semibold text-ink-950 dark:text-white;
+  }
+
+  .eyebrow {
+    @apply text-sm font-medium text-ink-500 dark:text-ink-400;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-md border border-ink-200 bg-white px-2.5 py-1 text-xs font-medium text-ink-700 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-200;
+  }
+
+  .stat-card {
+    @apply rounded-md border border-ink-200 bg-ink-50 p-3 text-sm transition-colors dark:border-ink-800 dark:bg-ink-950;
+  }
+
+  .list-row {
+    @apply rounded-md border border-transparent bg-ink-50 transition-colors hover:border-ink-200 hover:bg-white dark:bg-ink-950 dark:hover:border-ink-700 dark:hover:bg-ink-900;
+  }
+
   .nav-button {
-    @apply inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-semibold text-ink-600 transition hover:bg-ink-100 hover:text-ink-950 dark:text-ink-300 dark:hover:bg-ink-900 dark:hover:text-white;
+    @apply inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-medium text-ink-600 hover:border-ink-200 hover:bg-white hover:text-ink-950 active:bg-ink-100 dark:text-ink-300 dark:hover:border-ink-700 dark:hover:bg-ink-900 dark:hover:text-white;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease;
   }
 
   .nav-button.active {
-    @apply border-ink-200 bg-ink-950 text-white hover:bg-ink-900 dark:border-ink-700 dark:bg-white dark:text-ink-950 dark:hover:bg-ink-100;
+    @apply border-ink-950 bg-ink-950 text-white hover:bg-ink-900 dark:border-white dark:bg-white dark:text-ink-950 dark:hover:bg-ink-100;
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md bg-ink-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-ink-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-ink-950 dark:hover:bg-ink-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-ink-950 bg-ink-950 px-3 py-2 text-sm font-medium text-white hover:-translate-y-px hover:bg-ink-800 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-white dark:bg-white dark:text-ink-950 dark:hover:bg-ink-200;
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.08);
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
   }
 
   .button-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-ink-300 bg-white px-3 py-2 text-sm font-semibold text-ink-800 transition hover:bg-ink-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-ink-700 dark:bg-ink-950 dark:text-ink-100 dark:hover:bg-ink-800;
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-ink-300 bg-white px-3 py-2 text-sm font-medium text-ink-800 hover:-translate-y-px hover:border-ink-400 hover:bg-ink-50 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-ink-700 dark:bg-ink-950 dark:text-ink-100 dark:hover:border-ink-600 dark:hover:bg-ink-900;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
   }
 
   .icon-button {
-    @apply inline-flex h-9 w-9 items-center justify-center rounded-md border border-ink-300 bg-white text-ink-700 transition hover:bg-ink-100 disabled:cursor-not-allowed disabled:opacity-50 dark:border-ink-700 dark:bg-ink-950 dark:text-ink-100 dark:hover:bg-ink-800;
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-md border border-ink-300 bg-white text-ink-700 hover:-translate-y-px hover:border-ink-400 hover:bg-ink-50 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-ink-700 dark:bg-ink-950 dark:text-ink-100 dark:hover:border-ink-600 dark:hover:bg-ink-900;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease,
+      transform 160ms ease;
   }
 
   .icon-button.danger {
@@ -77,7 +135,10 @@ textarea:focus-visible {
   .field-label input,
   .field-label select,
   .field-label textarea {
-    @apply w-full rounded-md border border-ink-300 bg-white px-3 py-2 text-sm text-ink-950 outline-none transition focus:border-signal-blue focus:ring-2 focus:ring-signal-blue/20 dark:border-ink-700 dark:bg-ink-950 dark:text-white;
+    @apply w-full rounded-md border border-ink-300 bg-white px-3 py-2 text-sm text-ink-950 outline-none hover:border-ink-400 focus:border-signal-blue focus:ring-2 focus:ring-signal-blue/15 dark:border-ink-700 dark:bg-ink-950 dark:text-white dark:hover:border-ink-600;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease;
   }
 
   .setting-row {
@@ -93,7 +154,7 @@ textarea:focus-visible {
   }
 
   .check-row {
-    @apply flex items-center gap-2 rounded-md border border-ink-200 bg-ink-50 px-3 py-2 text-sm font-medium text-ink-700 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-200;
+    @apply flex items-center gap-2 rounded-md border border-ink-200 bg-white px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-200 dark:hover:border-ink-700 dark:hover:bg-ink-900;
   }
 
   .check-row input {

@@ -8,13 +8,13 @@ type HistoryPanelProps = {
 
 export function HistoryPanel({ items }: HistoryPanelProps) {
   return (
-    <section className="rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
+    <section className="surface p-4">
       <div className="flex items-center gap-2">
         <Clock3 className="h-4 w-4 text-ink-500" aria-hidden="true" />
-        <h2 className="text-base font-semibold text-ink-950 dark:text-white">Recognition History</h2>
+        <h2 className="section-title">Recognition History</h2>
       </div>
       {items.length === 0 ? (
-        <p className="mt-4 rounded-md bg-ink-50 p-3 text-sm text-ink-600 dark:bg-ink-950 dark:text-ink-300">
+        <p className="surface-muted mt-4 p-3 text-sm text-ink-600 dark:text-ink-300">
           No confirmed signs yet.
         </p>
       ) : (
@@ -22,7 +22,7 @@ export function HistoryPanel({ items }: HistoryPanelProps) {
           {items.map((item) => (
             <li
               key={item.id}
-              className="flex items-center justify-between gap-3 rounded-md bg-ink-50 px-3 py-2 text-sm dark:bg-ink-950"
+              className="list-row flex items-center justify-between gap-3 px-3 py-2 text-sm"
             >
               <div>
                 <p className="font-semibold text-ink-950 dark:text-white">{item.label}</p>
