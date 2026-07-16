@@ -1,6 +1,6 @@
-# Handspeak MVP
+# Handspeak
 
-Handspeak MVP is a real-time isolated-sign recognition and speech application. It uses a webcam,
+Handspeak is a real-time isolated-sign recognition and speech application. It uses a webcam,
 Google MediaPipe hand landmarks, a prototype static-sign classifier, sentence building, and the
 browser Web Speech API.
 
