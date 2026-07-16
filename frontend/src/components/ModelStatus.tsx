@@ -1,0 +1,59 @@
+import { Boxes, Cpu, Hand } from "lucide-react";
+
+import type { ModelLoadState } from "../types/recognition";
+
+type ModelStatusProps = {
+  state: ModelLoadState;
+  handsDetected: number;
+  warnings: string[];
+};
+
+function stateText(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+export function ModelStatus({ state, handsDetected, warnings }: ModelStatusProps) {
+  return (
+    <section className="grid gap-3 rounded-md border border-ink-200 bg-white p-4 shadow-sm dark:border-ink-800 dark:bg-ink-900">
+      <div className="flex items-center gap-2 text-sm font-semibold text-ink-900 dark:text-white">
+        <Cpu className="h-4 w-4" aria-hidden="true" />
+        Model Status
+      </div>
+      <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
+        <div className="rounded-md bg-ink-50 p-3 dark:bg-ink-950">
+          <div className="flex items-center gap-2 text-ink-500 dark:text-ink-400">
+            <Hand className="h-4 w-4" aria-hidden="true" />
+            Hand landmarks
+          </div>
+          <p className="mt-1 font-semibold text-ink-900 dark:text-white">
+            {stateText(state.handLandmarker)}
+          </p>
+        </div>
+        <div className="rounded-md bg-ink-50 p-3 dark:bg-ink-950">
+          <div className="flex items-center gap-2 text-ink-500 dark:text-ink-400">
+            <Boxes className="h-4 w-4" aria-hidden="true" />
+            Gesture model
+          </div>
+          <p className="mt-1 font-semibold text-ink-900 dark:text-white">
+            {stateText(state.gestureRecognizer)}
+          </p>
+        </div>
+        <div className="rounded-md bg-ink-50 p-3 dark:bg-ink-950">
+          <div className="flex items-center gap-2 text-ink-500 dark:text-ink-400">
+            <Hand className="h-4 w-4" aria-hidden="true" />
+            Hands detected
+          </div>
+          <p className="mt-1 font-semibold text-ink-900 dark:text-white">{handsDetected}</p>
+        </div>
+      </div>
+      <p className="text-sm text-ink-600 dark:text-ink-300">{state.message}</p>
+      {warnings.length > 0 ? (
+        <ul className="space-y-1 text-sm text-ink-600 dark:text-ink-300">
+          {warnings.map((warning) => (
+            <li key={warning}>{warning}</li>
+          ))}
+        </ul>
+      ) : null}
+    </section>
+  );
+}

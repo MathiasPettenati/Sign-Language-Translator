@@ -1,0 +1,33 @@
+{
+  "version": "0.1.0",
+  "mode": "isolated-sign-mvp",
+  "labels": [
+    "none",
+    "Hello",
+    "Goodbye",
+    "Yes",
+    "No",
+    "Please",
+    "Thank you",
+    "Help",
+    "Stop",
+    "More",
+    "Eat",
+    "Drink",
+    "Water",
+    "Bathroom",
+    "Friend",
+    "Love",
+    "I",
+    "You",
+    "A",
+    "B",
+    "C",
+    "L",
+    "V",
+    "W",
+    "Y"
+  ],
+  "prototypeRuleLabels": ["Yes", "Stop", "Help", "Friend", "Love", "I", "You", "Water", "A", "B", "L", "V", "W", "Y"],
+  "notes": "The shipped MVP includes a rule-based static prototype. Add gesture_recognizer.task after training to replace or augment rule predictions."
+}
