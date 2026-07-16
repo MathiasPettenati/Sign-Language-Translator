@@ -15,11 +15,11 @@ import type {
   SignPrediction,
 } from "../types/recognition";
 import { getBoundingBox } from "../utils/landmarks";
+import { LOCAL_GESTURE_MODEL_URL, localGestureModelExists } from "./modelAssets";
 
 const WASM_BASE_URL = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/wasm";
 const HAND_LANDMARKER_MODEL_URL =
   "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task";
-const LOCAL_GESTURE_MODEL_URL = "/models/gesture_recognizer.task";
 
 type CreateServiceOptions = {
   onStateChange?: (state: ModelLoadState) => void;
@@ -76,15 +76,6 @@ function getGesturePrediction(result: GestureRecognizerResult): SignPrediction |
     confidence: topGesture.score ?? 0,
     source: "mediapipe-model",
   };
-}
-
-async function localGestureModelExists(): Promise<boolean> {
-  try {
-    const response = await fetch(LOCAL_GESTURE_MODEL_URL, { method: "HEAD" });
-    return response.ok;
-  } catch {
-    return false;
-  }
 }
 
 export class MediaPipeService {
