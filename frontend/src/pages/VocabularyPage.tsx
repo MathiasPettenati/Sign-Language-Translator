@@ -23,7 +23,7 @@ export function VocabularyPage() {
         <h1 className="mt-1 text-3xl font-semibold text-deep-950 dark:text-white sm:text-4xl">
           Signs the translator can speak
         </h1>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-ink-600 dark:text-blue-50/70">
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-ink-600 dark:text-ink-50/70">
           Browse the signs and fingerspelling labels Handspeak can turn into text and speech.
           Prototype labels are available in the live translator today; the rest are ready for model
           expansion.
@@ -32,19 +32,19 @@ export function VocabularyPage() {
 
       <section className="grid gap-4 md:grid-cols-3">
         <div className="surface stat-panel p-4">
-          <p className="text-sm text-ink-500 dark:text-blue-50/60">Translation signs</p>
+          <p className="text-sm text-ink-500 dark:text-ink-50/60">Translation signs</p>
           <p className="mt-2 text-3xl font-semibold text-deep-950 dark:text-white">
             {TARGET_VOCABULARY.length}
           </p>
         </div>
         <div className="surface stat-panel p-4">
-          <p className="text-sm text-ink-500 dark:text-blue-50/60">Fingerspelling labels</p>
+          <p className="text-sm text-ink-500 dark:text-ink-50/60">Fingerspelling labels</p>
           <p className="mt-2 text-3xl font-semibold text-deep-950 dark:text-white">
             {FINGERSPELLING_LABELS.length}
           </p>
         </div>
         <div className="surface stat-panel p-4">
-          <p className="text-sm text-ink-500 dark:text-blue-50/60">Live prototype</p>
+          <p className="text-sm text-ink-500 dark:text-ink-50/60">Live prototype</p>
           <p className="mt-2 text-3xl font-semibold text-deep-950 dark:text-white">
             {prototypeCount}
           </p>
@@ -53,7 +53,7 @@ export function VocabularyPage() {
 
       <section className="surface p-4">
         <div className="flex items-center gap-2">
-          <BookOpen className="h-4 w-4 text-teal-500" aria-hidden="true" />
+          <BookOpen className="h-4 w-4 text-ink-600" aria-hidden="true" />
           <h2 className="section-title">Translation List</h2>
         </div>
 
@@ -63,13 +63,13 @@ export function VocabularyPage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h3 className="font-medium text-deep-950 dark:text-white">{entry.label}</h3>
-                  <p className="mt-1 text-sm text-ink-500 dark:text-blue-50/60">
+                  <p className="mt-1 text-sm text-ink-500 dark:text-ink-50/60">
                     {CATEGORY_LABELS[entry.category]}
                   </p>
                 </div>
-                <span className="chip chip-teal shrink-0">
+                <span className="chip chip-neutral shrink-0">
                   {entry.prototypeAvailable ? (
-                    <CheckCircle2 className="h-3.5 w-3.5 text-teal-500" aria-hidden="true" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-ink-600" aria-hidden="true" />
                   ) : (
                     <Clock3 className="h-3.5 w-3.5 text-ink-500" aria-hidden="true" />
                   )}

@@ -38,12 +38,12 @@ export function CameraStage({
         {!isActive ? (
           <div className="absolute inset-0 grid place-items-center bg-deep-950/88 p-6 text-center text-white">
             <div className="max-w-sm space-y-4">
-              <Camera className="mx-auto h-10 w-10 text-teal-200" aria-hidden="true" />
+              <Camera className="mx-auto h-10 w-10 text-ink-200" aria-hidden="true" />
               <div>
                 <p className="text-lg font-semibold">
                   {isStarting ? "Starting camera" : "Camera inactive"}
                 </p>
-                <p className="mt-1 text-sm text-blue-50/70">
+                <p className="mt-1 text-sm text-ink-50/70">
                   Live frames become translation signals in this browser session.
                 </p>
               </div>
@@ -67,7 +67,7 @@ export function CameraStage({
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 bg-deep-950 p-3 text-white">
         <div className="flex items-center gap-2 text-sm">
           <span
-            className={`h-2.5 w-2.5 rounded-full ${isActive ? "bg-teal-300" : "bg-blue-50/35"}`}
+            className={`h-2.5 w-2.5 rounded-full ${isActive ? "bg-white" : "bg-ink-50/35"}`}
             aria-hidden="true"
           />
           {isActive ? "Camera active" : "Camera stopped"}
@@ -77,7 +77,7 @@ export function CameraStage({
             type="button"
             onClick={onStart}
             disabled={isActive || isStarting}
-            className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm font-medium text-blue-50 transition-colors hover:border-teal-300/50 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm font-medium text-ink-50 transition-colors hover:border-white/50 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Camera className="h-4 w-4" aria-hidden="true" />
             Start
@@ -86,7 +86,7 @@ export function CameraStage({
             type="button"
             onClick={onStop}
             disabled={!isActive && !isStarting}
-            className="inline-flex items-center justify-center gap-2 rounded-md border border-white bg-white px-3 py-2 text-sm font-medium text-deep-950 transition-colors hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-md border border-white bg-white px-3 py-2 text-sm font-medium text-deep-950 transition-colors hover:bg-ink-100 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <CameraOff className="h-4 w-4" aria-hidden="true" />
             Stop

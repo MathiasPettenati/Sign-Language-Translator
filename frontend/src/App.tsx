@@ -46,11 +46,11 @@ export function App() {
       <header className="sticky top-0 z-20 border-b border-white/10 bg-deep-950 text-white shadow-[0_14px_40px_rgba(5,22,44,0.18)]">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-md border border-teal-300/35 bg-white/10 text-teal-100 shadow-[0_0_24px_rgba(20,184,166,0.18)]">
+            <div className="grid h-10 w-10 place-items-center rounded-md border border-white/25 bg-white/10 text-ink-100 shadow-[0_0_24px_rgba(255,255,255,0.08)]">
               <HandHeart className="h-5 w-5" aria-hidden="true" />
             </div>
             <div>
-              <p className="text-xs font-medium uppercase text-teal-100/75">Handspeak</p>
+              <p className="text-xs font-medium uppercase text-ink-100/75">Handspeak</p>
               <p className="text-sm font-semibold text-white">Live Sign Translator</p>
             </div>
           </div>

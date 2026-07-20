@@ -93,7 +93,7 @@ export class PredictionStabilizer {
         label,
         confidence: averageConfidence,
         consistency,
-        message: "Confirmed sign",
+        message: "Translation confirmed",
         justConfirmed: true,
       };
     }
@@ -103,7 +103,7 @@ export class PredictionStabilizer {
       label,
       confidence: averageConfidence,
       consistency,
-      message: isStable ? "Possible sign" : "Detecting",
+      message: isStable ? "Possible translation" : "Reading sign",
       justConfirmed: false,
     };
   }

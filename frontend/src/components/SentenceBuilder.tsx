@@ -80,11 +80,11 @@ export function SentenceBuilder({
         value={sentence}
         onChange={(event) => onSentenceChange(event.target.value)}
         rows={3}
-        className="mt-4 min-h-24 w-full resize-y rounded-md border border-deep-200 bg-white p-3 text-xl font-medium leading-snug text-deep-950 outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/15 dark:border-white/10 dark:bg-deep-950 dark:text-white sm:text-2xl"
+        className="mt-4 min-h-24 w-full resize-y rounded-md border border-deep-200 bg-white p-3 text-xl font-medium leading-snug text-deep-950 outline-none transition focus:border-ink-950 focus:ring-2 focus:ring-ink-950/10 dark:border-white/10 dark:bg-deep-950 dark:text-white sm:text-2xl"
         aria-label="Editable generated sentence"
         placeholder="Translated signs appear here"
       />
-      <div className="surface-muted mt-3 px-3 py-2 text-sm text-deep-800 dark:text-blue-50">
+      <div className="surface-muted mt-3 px-3 py-2 text-sm text-deep-800 dark:text-ink-50">
         <span className="font-semibold">Speech:</span>{" "}
         {spokenCaption ? spokenCaption : "No speech output yet"}
       </div>
