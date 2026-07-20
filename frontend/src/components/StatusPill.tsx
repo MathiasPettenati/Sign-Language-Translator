@@ -8,19 +8,19 @@ type StatusPillProps = {
 };
 
 const STATUS_STYLES: Record<RecognitionStatus, string> = {
-  idle: "border-ink-300 bg-white text-ink-700 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100",
+  idle: "border-white/15 bg-white/10 text-blue-50",
   loading:
-    "border-signal-blue/30 bg-white text-signal-blue dark:border-signal-blue/50 dark:bg-ink-900 dark:text-blue-200",
+    "border-teal-300/40 bg-teal-300/12 text-teal-100",
   detecting:
-    "border-signal-blue/30 bg-white text-signal-blue dark:border-signal-blue/50 dark:bg-ink-900 dark:text-blue-200",
+    "border-teal-300/40 bg-teal-300/12 text-teal-100",
   possible:
-    "border-signal-amber/40 bg-white text-amber-800 dark:border-signal-amber/60 dark:bg-ink-900 dark:text-amber-200",
+    "border-signal-amber/50 bg-signal-amber/10 text-amber-100",
   confirmed:
-    "border-signal-green/40 bg-white text-green-800 dark:border-signal-green/60 dark:bg-ink-900 dark:text-green-200",
+    "border-teal-300/60 bg-teal-300 text-deep-950",
   uncertain:
-    "border-ink-300 bg-white text-ink-700 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-100",
+    "border-white/15 bg-white/10 text-blue-50",
   error:
-    "border-signal-red/40 bg-white text-red-800 dark:border-signal-red/60 dark:bg-ink-900 dark:text-red-200",
+    "border-signal-red/60 bg-signal-red/10 text-red-100",
 };
 
 function StatusIcon({ status }: { status: RecognitionStatus }) {

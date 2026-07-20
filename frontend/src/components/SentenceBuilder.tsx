@@ -24,7 +24,7 @@ export function SentenceBuilder({
   return (
     <section className="surface p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="section-title">Generated Sentence</h2>
+        <h2 className="section-title">Translated Sentence</h2>
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
@@ -80,12 +80,12 @@ export function SentenceBuilder({
         value={sentence}
         onChange={(event) => onSentenceChange(event.target.value)}
         rows={3}
-        className="mt-4 min-h-24 w-full resize-y rounded-md border border-ink-300 bg-white p-3 text-xl font-medium leading-snug text-ink-950 outline-none transition focus:border-signal-blue focus:ring-2 focus:ring-signal-blue/15 dark:border-ink-700 dark:bg-ink-950 dark:text-white sm:text-2xl"
+        className="mt-4 min-h-24 w-full resize-y rounded-md border border-deep-200 bg-white p-3 text-xl font-medium leading-snug text-deep-950 outline-none transition focus:border-teal-500 focus:ring-2 focus:ring-teal-500/15 dark:border-white/10 dark:bg-deep-950 dark:text-white sm:text-2xl"
         aria-label="Editable generated sentence"
-        placeholder="Confirmed signs appear here"
+        placeholder="Translated signs appear here"
       />
-      <div className="surface-muted mt-3 px-3 py-2 text-sm text-ink-700 dark:text-ink-200">
-        <span className="font-semibold">Captions:</span>{" "}
+      <div className="surface-muted mt-3 px-3 py-2 text-sm text-deep-800 dark:text-blue-50">
+        <span className="font-semibold">Speech:</span>{" "}
         {spokenCaption ? spokenCaption : "No speech output yet"}
       </div>
     </section>

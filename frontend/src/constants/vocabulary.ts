@@ -1,7 +1,7 @@
 import type { RecognitionSettings } from "../types/recognition";
 import targetVocabulary from "./targetVocabulary.json";
 
-export const APP_NAME = "Handspeak MVP";
+export const APP_NAME = "Handspeak Translator";
 export const APP_VERSION = "0.1.0";
 
 export const TARGET_VOCABULARY: readonly string[] = targetVocabulary;
@@ -29,7 +29,7 @@ const PROTOTYPE_RULE_LABEL_SET = new Set<string>(PROTOTYPE_RULE_LABELS);
 
 export const NONE_LABEL = "none";
 
-export const DATASET_LABELS: readonly string[] = [
+export const MODEL_LABELS: readonly string[] = [
   NONE_LABEL,
   ...TARGET_VOCABULARY,
   ...FINGERSPELLING_LABELS,
@@ -43,7 +43,7 @@ export type VocabularyEntry = {
   prototypeAvailable: boolean;
 };
 
-export const VOCABULARY_DATABASE: VocabularyEntry[] = [
+export const VOCABULARY_ENTRIES: VocabularyEntry[] = [
   {
     label: NONE_LABEL,
     category: "neutral",
@@ -85,5 +85,4 @@ export const LOCAL_STORAGE_KEYS = {
   settings: "handspeak:settings",
   sentence: "handspeak:sentence",
   history: "handspeak:history",
-  collectorSession: "handspeak:collector-session",
 } as const;

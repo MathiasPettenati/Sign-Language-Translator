@@ -1,11 +1,11 @@
 import { expect, test } from "@playwright/test";
 
-test("loads recognizer and dataset routes", async ({ page }) => {
+test("loads translator and vocabulary routes", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("Sign to Speech MVP")).toBeVisible();
-  await expect(page.getByText("Isolated-sign recognition MVP")).toBeVisible();
+  await expect(page.getByText("Live Sign Translator")).toBeVisible();
+  await expect(page.getByText("Live sign translation")).toBeVisible();
 
-  await page.getByRole("button", { name: "Dataset" }).click();
-  await expect(page.getByText("Dataset Collector")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Export Dataset" })).toBeDisabled();
+  await page.getByRole("button", { name: "Words" }).click();
+  await expect(page.getByText("Translation vocabulary")).toBeVisible();
+  await expect(page.getByText("Signs the translator can speak")).toBeVisible();
 });

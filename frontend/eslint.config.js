@@ -16,6 +16,7 @@ export default tseslint.config(
       "vitest.config.mjs",
       "tailwind.config.ts",
       "playwright.config.ts",
+      "scripts/**/*.mjs",
     ],
     languageOptions: {
       globals: globals.node,

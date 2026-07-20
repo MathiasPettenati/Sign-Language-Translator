@@ -25,7 +25,9 @@
 body {
   margin: 0;
   min-width: 320px;
-  background: #f6f7f8;
+  background:
+    linear-gradient(180deg, rgba(230, 249, 255, 0.9) 0%, rgba(243, 251, 255, 1) 340px),
+    #f3fbff;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -41,7 +43,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #2673c9;
+  outline: 2px solid #14b8a6;
   outline-offset: 2px;
 }
 
@@ -56,36 +58,54 @@ textarea:focus-visible {
 
 @layer components {
   .surface {
-    @apply rounded-lg border border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-900;
-    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.05);
+    @apply rounded-lg border border-deep-100 bg-white dark:border-white/10 dark:bg-deep-900;
+    box-shadow: 0 18px 50px rgba(5, 22, 44, 0.08);
+  }
+
+  .surface-feature {
+    @apply border-teal-200/70 bg-white;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(233, 250, 250, 0.86)),
+      #ffffff;
   }
 
   .surface-muted {
-    @apply rounded-md border border-ink-200 bg-ink-50 dark:border-ink-800 dark:bg-ink-950;
+    @apply rounded-md border border-deep-100 bg-deep-50/70 dark:border-white/10 dark:bg-deep-950/70;
   }
 
   .section-title {
-    @apply text-base font-semibold text-ink-950 dark:text-white;
+    @apply text-base font-semibold text-deep-950 dark:text-white;
   }
 
   .eyebrow {
-    @apply text-sm font-medium text-ink-500 dark:text-ink-400;
+    @apply text-sm font-semibold uppercase text-teal-700 dark:text-teal-200;
   }
 
   .chip {
-    @apply inline-flex items-center rounded-md border border-ink-200 bg-white px-2.5 py-1 text-xs font-medium text-ink-700 dark:border-ink-700 dark:bg-ink-900 dark:text-ink-200;
+    @apply inline-flex items-center gap-1.5 rounded-md border border-deep-100 bg-white px-2.5 py-1 text-xs font-medium text-deep-700 dark:border-white/10 dark:bg-white/10 dark:text-blue-50;
+  }
+
+  .chip-teal {
+    @apply border-teal-300/60 bg-teal-50 text-teal-800 dark:border-teal-300/30 dark:bg-teal-300/10 dark:text-teal-100;
   }
 
   .stat-card {
-    @apply rounded-md border border-ink-200 bg-ink-50 p-3 text-sm transition-colors dark:border-ink-800 dark:bg-ink-950;
+    @apply rounded-md border border-deep-100 bg-deep-50/70 p-3 text-sm transition-colors dark:border-white/10 dark:bg-deep-950/70;
+  }
+
+  .stat-panel {
+    @apply border-deep-100 bg-white;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(235, 249, 250, 0.78)),
+      #ffffff;
   }
 
   .list-row {
-    @apply rounded-md border border-transparent bg-ink-50 transition-colors hover:border-ink-200 hover:bg-white dark:bg-ink-950 dark:hover:border-ink-700 dark:hover:bg-ink-900;
+    @apply rounded-md border border-transparent bg-deep-50/65 transition-colors hover:border-teal-200 hover:bg-white dark:bg-deep-950/65 dark:hover:border-teal-300/30 dark:hover:bg-deep-900;
   }
 
   .nav-button {
-    @apply inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-medium text-ink-600 hover:border-ink-200 hover:bg-white hover:text-ink-950 active:bg-ink-100 dark:text-ink-300 dark:hover:border-ink-700 dark:hover:bg-ink-900 dark:hover:text-white;
+    @apply inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-medium text-blue-50/70 hover:border-white/15 hover:bg-white/10 hover:text-white active:bg-white/15;
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -93,12 +113,12 @@ textarea:focus-visible {
   }
 
   .nav-button.active {
-    @apply border-ink-950 bg-ink-950 text-white hover:bg-ink-900 dark:border-white dark:bg-white dark:text-ink-950 dark:hover:bg-ink-100;
+    @apply border-teal-300/40 bg-teal-300 text-deep-950 hover:bg-teal-200;
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-ink-950 bg-ink-950 px-3 py-2 text-sm font-medium text-white hover:-translate-y-px hover:bg-ink-800 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-white dark:bg-white dark:text-ink-950 dark:hover:bg-ink-200;
-    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.08);
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-teal-500 bg-teal-500 px-3 py-2 text-sm font-semibold text-deep-950 hover:-translate-y-px hover:border-teal-400 hover:bg-teal-400 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-teal-300 dark:bg-teal-300 dark:text-deep-950 dark:hover:bg-teal-200;
+    box-shadow: 0 12px 28px rgba(20, 184, 166, 0.22);
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -107,7 +127,7 @@ textarea:focus-visible {
   }
 
   .button-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-md border border-ink-300 bg-white px-3 py-2 text-sm font-medium text-ink-800 hover:-translate-y-px hover:border-ink-400 hover:bg-ink-50 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-ink-700 dark:bg-ink-950 dark:text-ink-100 dark:hover:border-ink-600 dark:hover:bg-ink-900;
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-deep-200 bg-white px-3 py-2 text-sm font-medium text-deep-900 hover:-translate-y-px hover:border-teal-300 hover:bg-teal-50 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-white/10 dark:bg-deep-950 dark:text-blue-50 dark:hover:border-teal-300/40 dark:hover:bg-deep-900;
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -116,7 +136,7 @@ textarea:focus-visible {
   }
 
   .icon-button {
-    @apply inline-flex h-9 w-9 items-center justify-center rounded-md border border-ink-300 bg-white text-ink-700 hover:-translate-y-px hover:border-ink-400 hover:bg-ink-50 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-ink-700 dark:bg-ink-950 dark:text-ink-100 dark:hover:border-ink-600 dark:hover:bg-ink-900;
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-md border border-deep-200 bg-white text-deep-800 hover:-translate-y-px hover:border-teal-300 hover:bg-teal-50 active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-50 dark:border-white/10 dark:bg-deep-950 dark:text-blue-50 dark:hover:border-teal-300/40 dark:hover:bg-deep-900;
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -125,39 +145,62 @@ textarea:focus-visible {
   }
 
   .icon-button.danger {
-    @apply border-signal-red/30 text-signal-red hover:bg-signal-red/10 dark:border-signal-red/50 dark:text-red-200;
+    @apply border-signal-red/30 text-signal-red hover:bg-signal-red/10 dark:border-signal-red/50 dark:text-red-100;
   }
 
   .field-label {
-    @apply grid gap-2 text-sm font-medium text-ink-700 dark:text-ink-200;
+    @apply grid gap-2 text-sm font-medium text-deep-800 dark:text-blue-50;
   }
 
   .field-label input,
   .field-label select,
   .field-label textarea {
-    @apply w-full rounded-md border border-ink-300 bg-white px-3 py-2 text-sm text-ink-950 outline-none hover:border-ink-400 focus:border-signal-blue focus:ring-2 focus:ring-signal-blue/15 dark:border-ink-700 dark:bg-ink-950 dark:text-white dark:hover:border-ink-600;
+    @apply w-full rounded-md border border-deep-200 bg-white px-3 py-2 text-sm text-deep-950 outline-none hover:border-teal-300 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/15 dark:border-white/10 dark:bg-deep-950 dark:text-white dark:hover:border-teal-300/40;
     transition:
       border-color 160ms ease,
       box-shadow 160ms ease;
   }
 
   .setting-row {
-    @apply grid grid-cols-[minmax(120px,1fr)_minmax(140px,1.4fr)_72px] items-center gap-3 text-sm font-medium text-ink-700 dark:text-ink-200;
+    @apply grid grid-cols-[minmax(120px,1fr)_minmax(140px,1.4fr)_72px] items-center gap-3 text-sm font-medium text-deep-800 dark:text-blue-50;
   }
 
   .setting-row input[type="range"] {
-    @apply w-full accent-signal-blue;
+    @apply w-full accent-teal-500;
   }
 
   .setting-row output {
-    @apply text-right text-xs tabular-nums text-ink-500 dark:text-ink-400;
+    @apply text-right text-xs tabular-nums text-ink-500 dark:text-blue-50/60;
   }
 
   .check-row {
-    @apply flex items-center gap-2 rounded-md border border-ink-200 bg-white px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:border-ink-300 hover:bg-ink-50 dark:border-ink-800 dark:bg-ink-950 dark:text-ink-200 dark:hover:border-ink-700 dark:hover:bg-ink-900;
+    @apply flex items-center gap-2 rounded-md border border-deep-100 bg-white px-3 py-2 text-sm font-medium text-deep-800 transition-colors hover:border-teal-300 hover:bg-teal-50 dark:border-white/10 dark:bg-deep-950 dark:text-blue-50 dark:hover:border-teal-300/40 dark:hover:bg-deep-900;
   }
 
   .check-row input {
-    @apply h-4 w-4 accent-signal-blue;
+    @apply h-4 w-4 accent-teal-500;
+  }
+
+  .translation-hero {
+    @apply rounded-lg border border-white/10 bg-deep-950 text-white shadow-panel;
+    background:
+      linear-gradient(135deg, rgba(7, 29, 52, 1), rgba(9, 63, 87, 0.98) 58%, rgba(13, 107, 149, 0.94)),
+      #071d34;
+  }
+
+  .hero-copy {
+    @apply rounded-md border border-white/10 bg-white/5 p-4 sm:p-5;
+  }
+
+  .hero-stat {
+    @apply inline-flex min-h-10 items-center gap-2 rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm font-medium text-blue-50/80;
+  }
+
+  .hero-stat svg {
+    @apply text-teal-200;
+  }
+
+  .translation-panel {
+    @apply rounded-lg border border-teal-200/50 bg-white text-deep-950 shadow-panel dark:border-white/10 dark:bg-deep-900 dark:text-white;
   }
 }

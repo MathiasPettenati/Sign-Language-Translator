@@ -990,7 +990,7 @@ const labelPayload = {
   labels: ["none", ...targetVocabulary, ...fingerspellingLabels],
   prototypeRuleLabels,
   notes:
-    "The shipped MVP includes a rule-based static prototype for a subset of labels. The full vocabulary is available for dataset collection and custom model training.",
+    "The shipped translator includes a rule-based static prototype for a subset of labels. The full vocabulary is available for translation display and future custom model expansion.",
 };
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
@@ -1005,4 +1005,4 @@ await writeFile(
   `${JSON.stringify(labelPayload, null, 2)}\n`,
 );
 
-console.log(`Generated ${targetVocabulary.length} target words and ${labelPayload.labels.length} dataset labels.`);
+console.log(`Generated ${targetVocabulary.length} target words and ${labelPayload.labels.length} translation labels.`);

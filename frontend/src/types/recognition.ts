@@ -93,36 +93,6 @@ export type RecognitionHistoryItem = {
   createdAt: string;
 };
 
-export type DatasetSplit = "train" | "validation" | "test";
-
-export type DatasetSample = {
-  id: string;
-  label: string;
-  participantId: string;
-  sessionId: string;
-  split: DatasetSplit;
-  createdAt: string;
-  hands: HandLandmarkSet[];
-  normalizedHands: Landmark[][];
-  mirroredCamera: boolean;
-  notes: string;
-};
-
-export type DatasetExport = {
-  schemaVersion: 1;
-  exportedAt: string;
-  appVersion: string;
-  samples: DatasetSample[];
-};
-
-export type SampleCount = {
-  label: string;
-  total: number;
-  train: number;
-  validation: number;
-  test: number;
-};
-
 export type SpeechVoiceOption = {
   name: string;
   lang: string;

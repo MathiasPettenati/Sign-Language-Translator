@@ -1524,5 +1524,5 @@
     "W",
     "Y"
   ],
-  "notes": "The shipped MVP includes a rule-based static prototype for a subset of labels. The full vocabulary is available for dataset collection and custom model training."
+  "notes": "The shipped translator includes a rule-based static prototype for a subset of labels. The full vocabulary is available for translation display and future custom model expansion."
 }
