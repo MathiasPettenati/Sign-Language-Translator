@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const TRANSITION_MS = 1_050;
+const GLASSES_MODEL_URL = "/models/glasses/scene.gltf";
 
 type EntryExperienceProps = {
   reducedMotion: boolean;
@@ -84,9 +86,25 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
     const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
     camera.position.set(0, 0.04, 6);
 
-    const glasses = createGlasses();
+    const glasses = new THREE.Group();
+    const fallbackGlasses = createFallbackGlasses();
+    glasses.add(fallbackGlasses);
     scene.add(glasses);
     scene.add(createAtmosphere());
+
+    const loader = new GLTFLoader();
+    loader.load(
+      GLASSES_MODEL_URL,
+      (gltf) => {
+        const loadedGlasses = normalizeGlassesModel(gltf.scene);
+        fallbackGlasses.visible = false;
+        glasses.add(loadedGlasses);
+      },
+      undefined,
+      () => {
+        fallbackGlasses.visible = true;
+      },
+    );
 
     const ambient = new THREE.AmbientLight(0xffffff, 0.62);
     const key = new THREE.DirectionalLight(0xffffff, 3.2);
@@ -172,21 +190,75 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
         <h1>Sign language, heard clearly.</h1>
         <p>Optical translation interface</p>
       </div>
-      <div className="entry-status" aria-hidden="true">
-        <span />
-        Interpreter ready
-      </div>
       <button
         type="button"
         className="entry-activate"
         onClick={activate}
         aria-label="Enter Handspeak translator"
       />
+      <p className="entry-credit">
+        Model:{" "}
+        <a
+          href="https://sketchfab.com/3d-models/glasses-69b4b065ad2242d5b1192b58a006a54e"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Glasses
+        </a>{" "}
+        by photon
+      </p>
     </main>
   );
 }
 
-function createGlasses(): THREE.Group {
+function normalizeGlassesModel(model: THREE.Object3D): THREE.Group {
+  styleLoadedModel(model);
+  model.updateMatrixWorld(true);
+
+  const box = new THREE.Box3().setFromObject(model);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const pivot = new THREE.Group();
+  const targetWidth = 3.5;
+  const width = Math.max(size.x, 0.001);
+
+  model.position.sub(center);
+  pivot.add(model);
+  pivot.scale.setScalar(targetWidth / width);
+  pivot.rotation.x = -0.02;
+  pivot.rotation.y = Math.PI + 0.02;
+
+  return pivot;
+}
+
+function styleLoadedModel(model: THREE.Object3D): void {
+  model.traverse((child) => {
+    if (!(child instanceof THREE.Mesh)) {
+      return;
+    }
+
+    child.frustumCulled = false;
+    const materials = Array.isArray(child.material) ? child.material : [child.material];
+
+    materials.forEach((material) => {
+      if (!(material instanceof THREE.MeshStandardMaterial || material instanceof THREE.MeshPhysicalMaterial)) {
+        return;
+      }
+
+      const isGlass = material.name.toLowerCase().includes("glass");
+      material.map = null;
+      material.color.set(isGlass ? 0x08090a : 0x737373);
+      material.metalness = isGlass ? 0.18 : 0.82;
+      material.roughness = isGlass ? 0.2 : 0.32;
+      material.transparent = isGlass;
+      material.opacity = isGlass ? 0.66 : 1;
+      material.side = THREE.DoubleSide;
+      material.needsUpdate = true;
+    });
+  });
+}
+
+function createFallbackGlasses(): THREE.Group {
   const group = new THREE.Group();
 
   const frameMaterial = new THREE.MeshStandardMaterial({
@@ -350,10 +422,10 @@ function createAtmosphere(): THREE.Points {
   return new THREE.Points(
     geometry,
     new THREE.PointsMaterial({
-      color: 0xffffff,
+      color: 0x111518,
       size: 0.018,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.12,
       depthWrite: false,
     }),
   );

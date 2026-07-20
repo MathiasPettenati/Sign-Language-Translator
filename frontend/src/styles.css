@@ -58,11 +58,11 @@ textarea:focus-visible {
 
 @layer components {
   .entry-screen {
-    @apply relative min-h-screen overflow-hidden bg-ink-950 text-white;
+    @apply relative min-h-screen overflow-hidden bg-app text-ink-950;
     background:
-      radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.13), transparent 22rem),
-      radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.08), transparent 18rem),
-      linear-gradient(180deg, #111518 0%, #050607 100%);
+      radial-gradient(circle at 50% 45%, rgba(17, 21, 24, 0.08), transparent 22rem),
+      radial-gradient(circle at 18% 18%, rgba(17, 21, 24, 0.045), transparent 18rem),
+      linear-gradient(180deg, #ffffff 0%, #f6f7f8 100%);
     transition: opacity 420ms ease 760ms;
   }
 
@@ -70,8 +70,8 @@ textarea:focus-visible {
     @apply pointer-events-none absolute inset-0;
     content: "";
     background:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      linear-gradient(rgba(17, 21, 24, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17, 21, 24, 0.035) 1px, transparent 1px);
     background-size: 72px 72px;
     mask-image: radial-gradient(circle at center, black, transparent 68%);
   }
@@ -79,7 +79,7 @@ textarea:focus-visible {
   .entry-screen::after {
     @apply pointer-events-none absolute inset-x-0 bottom-0 h-48;
     content: "";
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.62));
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.72));
   }
 
   .entry-screen.is-launching {
@@ -95,28 +95,27 @@ textarea:focus-visible {
   }
 
   .entry-copy h1 {
-    @apply mt-3 text-4xl font-semibold leading-none text-white sm:text-6xl;
+    @apply mt-3 text-4xl font-semibold leading-none text-ink-950 sm:text-6xl;
   }
 
   .entry-copy p:last-child {
-    @apply mt-4 text-sm font-medium uppercase text-ink-200/70;
+    @apply mt-4 text-sm font-medium uppercase text-ink-600;
   }
 
   .entry-kicker {
-    @apply text-xs font-semibold uppercase text-ink-100/60;
-  }
-
-  .entry-status {
-    @apply pointer-events-none absolute bottom-8 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-ink-100/75 backdrop-blur;
-  }
-
-  .entry-status span {
-    @apply h-2 w-2 rounded-full bg-white;
-    box-shadow: 0 0 18px rgba(255, 255, 255, 0.52);
+    @apply text-xs font-semibold uppercase text-ink-500;
   }
 
   .entry-activate {
     @apply absolute inset-0 cursor-pointer border-0 bg-transparent p-0;
+  }
+
+  .entry-credit {
+    @apply absolute bottom-4 right-4 z-10 text-xs text-ink-500;
+  }
+
+  .entry-credit a {
+    @apply text-ink-700 underline decoration-ink-300 underline-offset-4 hover:text-ink-950;
   }
 
   .app-shell {
