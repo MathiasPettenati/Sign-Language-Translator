@@ -7,6 +7,7 @@ export default {
     extend: {
       colors: {
         app: "#f6f7f8",
+        paper: "#f7f5ee",
         deep: {
           50: "#f7f8f8",
           100: "#edeff0",

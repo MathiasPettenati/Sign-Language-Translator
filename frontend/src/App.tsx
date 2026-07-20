@@ -54,15 +54,15 @@ export function App() {
 
   return (
     <div className="app-shell min-h-screen bg-app text-ink-900 dark:bg-deep-950 dark:text-white">
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-deep-950 text-white shadow-[0_14px_40px_rgba(5,22,44,0.18)]">
+      <header className="sticky top-0 z-20 border-y border-ink-950 bg-paper text-ink-950 dark:border-white dark:bg-deep-950 dark:text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-md border border-white/25 bg-white/10 text-ink-100 shadow-[0_0_24px_rgba(255,255,255,0.08)]">
+            <div className="grid h-10 w-10 place-items-center border border-ink-950 bg-ink-950 text-white dark:border-white dark:bg-white dark:text-deep-950">
               <HandHeart className="h-5 w-5" aria-hidden="true" />
             </div>
             <div>
-              <p className="text-xs font-medium uppercase text-ink-100/75">Handspeak</p>
-              <p className="text-sm font-semibold text-white">Live Sign Translator</p>
+              <p className="text-xs font-bold uppercase text-ink-700 dark:text-ink-100">Handspeak</p>
+              <p className="text-sm font-bold text-ink-950 dark:text-white">Live Sign Translator</p>
             </div>
           </div>
           <nav className="flex items-center gap-2" aria-label="Main navigation">
