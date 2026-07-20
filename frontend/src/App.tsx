@@ -2,6 +2,7 @@ import { BookOpen, HandHeart, Languages } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { DEFAULT_RECOGNITION_SETTINGS, LOCAL_STORAGE_KEYS } from "./constants/vocabulary";
+import { EntryExperience } from "./components/EntryExperience";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { RecognizerPage } from "./pages/RecognizerPage";
 import { VocabularyPage } from "./pages/VocabularyPage";
@@ -24,6 +25,7 @@ export function App() {
     isRecognitionSettings,
   );
   const [page, setPage] = useState<Page>(() => getPageFromHash());
+  const [hasEntered, setHasEntered] = useState(false);
 
   useEffect(() => {
     const onHashChange = () => setPage(getPageFromHash());
@@ -41,8 +43,17 @@ export function App() {
     setPage(nextPage);
   };
 
+  if (!hasEntered) {
+    return (
+      <EntryExperience
+        reducedMotion={settings.reducedMotion}
+        onEnter={() => setHasEntered(true)}
+      />
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-app text-ink-900 dark:bg-deep-950 dark:text-white">
+    <div className="app-shell min-h-screen bg-app text-ink-900 dark:bg-deep-950 dark:text-white">
       <header className="sticky top-0 z-20 border-b border-white/10 bg-deep-950 text-white shadow-[0_14px_40px_rgba(5,22,44,0.18)]">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">

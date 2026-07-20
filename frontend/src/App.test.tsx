@@ -5,16 +5,29 @@ import { describe, expect, it } from "vitest";
 import { App } from "./App";
 
 describe("App", () => {
-  it("renders the recognizer shell", () => {
+  it("renders the 3D entry experience first", () => {
     render(<App />);
 
-    expect(screen.getByText("Live Sign Translator")).toBeInTheDocument();
+    expect(screen.getByText("Sign language, heard clearly.")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /enter handspeak translator/i })).toBeInTheDocument();
+  });
+
+  it("renders the recognizer shell after entry", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /enter handspeak translator/i }));
+
+    expect(await screen.findByText("Live Sign Translator")).toBeInTheDocument();
     expect(screen.getByText("Live sign translation")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /start camera/i })).toBeInTheDocument();
   });
 
-  it("keeps translation navigation focused", () => {
+  it("keeps translation navigation focused", async () => {
+    const user = userEvent.setup();
     render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /enter handspeak translator/i }));
 
     expect(screen.getByRole("button", { name: /translate/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /words/i })).toBeInTheDocument();
@@ -24,6 +37,7 @@ describe("App", () => {
     const user = userEvent.setup();
     render(<App />);
 
+    await user.click(screen.getByRole("button", { name: /enter handspeak translator/i }));
     await user.click(screen.getByRole("button", { name: /words/i }));
 
     expect(screen.getByText("Translation vocabulary")).toBeInTheDocument();
