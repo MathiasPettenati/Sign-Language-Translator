@@ -42,7 +42,7 @@ export function drawHandOverlay(
   }
 
   hands.forEach((hand) => {
-    const color = hand.handedness === "Left" ? "#2673c9" : "#1f9d6a";
+    const color = hand.handedness === "Left" ? "#f7f7f7" : "#9a9a9a";
     const width = canvas.width;
     const height = canvas.height;
 
@@ -87,7 +87,7 @@ export function drawHandOverlay(
 
     const handednessText = `${hand.handedness} ${Math.round(hand.handednessScore * 100)}%`;
     context.font = "16px Inter, system-ui, sans-serif";
-    context.fillStyle = "rgba(17, 21, 24, 0.85)";
+    context.fillStyle = "rgba(17, 17, 17, 0.85)";
     context.fillRect(boxX - padding, Math.max(0, boxY - 42), context.measureText(handednessText).width + 18, 28);
     context.fillStyle = "#ffffff";
     context.fillText(handednessText, boxX - padding + 9, Math.max(18, boxY - 22));
@@ -95,7 +95,7 @@ export function drawHandOverlay(
 
   const confidenceText = `${options.statusLabel} ${Math.round(options.confidence * 100)}%`;
   context.font = "18px Inter, system-ui, sans-serif";
-  context.fillStyle = "rgba(17, 21, 24, 0.82)";
+  context.fillStyle = "rgba(17, 17, 17, 0.82)";
   context.fillRect(16, 16, context.measureText(confidenceText).width + 24, 36);
   context.fillStyle = "#ffffff";
   context.fillText(confidenceText, 28, 40);

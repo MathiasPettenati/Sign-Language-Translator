@@ -19,7 +19,7 @@ describe("App", () => {
     await user.click(screen.getByRole("button", { name: /enter handspeak translator/i }));
 
     expect(await screen.findByText("Live Sign Translator")).toBeInTheDocument();
-    expect(screen.getByText("Live sign translation")).toBeInTheDocument();
+    expect(screen.getByText("Translation desk")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /start camera/i })).toBeInTheDocument();
   });
 

@@ -1,4 +1,4 @@
-import { Languages, MessageSquareText, ShieldCheck, Sparkles } from "lucide-react";
+import { Languages, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
 
 import { CameraStage } from "../components/CameraStage";
 import { ConfidenceMeter } from "../components/ConfidenceMeter";
@@ -7,7 +7,6 @@ import { HistoryPanel } from "../components/HistoryPanel";
 import { ModelStatus } from "../components/ModelStatus";
 import { SentenceBuilder } from "../components/SentenceBuilder";
 import { SettingsPanel } from "../components/SettingsPanel";
-import { APP_NAME } from "../constants/vocabulary";
 import { useRecognizer } from "../hooks/useRecognizer";
 import type { RecognitionSettings } from "../types/recognition";
 
@@ -26,13 +25,7 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
   return (
     <main className="newspaper-page space-y-5">
       <section className="translation-hero p-4 sm:p-5 lg:p-6">
-        <div className="edition-line">
-          <span>{APP_NAME}</span>
-          <span>Live sign translation</span>
-          <span>Browser edition</span>
-        </div>
-
-        <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-5 pt-5 lg:grid-cols-[minmax(0,1.35fr)_360px]">
+        <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-[minmax(0,1.35fr)_360px]">
           <div className="min-w-0 space-y-4">
             <div className="hero-copy">
               <p className="eyebrow">Translation desk</p>
@@ -48,7 +41,7 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
                   <span>Sign desk</span>
                 </div>
                 <div className="hero-stat">
-                  <MessageSquareText className="h-4 w-4" aria-hidden="true" />
+                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
                   <span>Voice column</span>
                 </div>
                 <div className="hero-stat">

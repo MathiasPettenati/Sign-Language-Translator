@@ -1,4 +1,4 @@
-import { Boxes, Cpu, Hand } from "lucide-react";
+import { BrainCircuit, Cpu, Hand } from "lucide-react";
 
 import type { ModelLoadState } from "../types/recognition";
 
@@ -31,7 +31,7 @@ export function ModelStatus({ state, handsDetected, warnings }: ModelStatusProps
         </div>
         <div className="stat-card">
           <div className="flex items-center gap-2 text-ink-500 dark:text-ink-50/60">
-            <Boxes className="h-4 w-4" aria-hidden="true" />
+            <BrainCircuit className="h-4 w-4" aria-hidden="true" />
             Sign model
           </div>
           <p className="mt-1 font-semibold text-deep-950 dark:text-white">

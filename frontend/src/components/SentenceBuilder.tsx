@@ -1,4 +1,4 @@
-import { RotateCcw, Square, Trash2, Undo2, Volume2 } from "lucide-react";
+import { CircleStop, RotateCcw, Trash2, Undo2, Volume2 } from "lucide-react";
 
 type SentenceBuilderProps = {
   sentence: string;
@@ -52,7 +52,7 @@ export function SentenceBuilder({
             aria-label="Stop speaking"
             title="Stop speaking"
           >
-            <Square className="h-4 w-4" aria-hidden="true" />
+            <CircleStop className="h-4 w-4" aria-hidden="true" />
           </button>
           <button
             type="button"
@@ -80,7 +80,7 @@ export function SentenceBuilder({
         value={sentence}
         onChange={(event) => onSentenceChange(event.target.value)}
         rows={3}
-        className="mt-4 min-h-24 w-full resize-y border border-ink-950 bg-white p-3 text-xl font-bold leading-snug text-deep-950 outline-none transition focus:border-ink-950 focus:ring-2 focus:ring-ink-950/10 dark:border-white/25 dark:bg-deep-950 dark:text-white sm:text-2xl"
+        className="mt-4 min-h-24 w-full resize-y rounded-lg border border-ink-200 bg-white p-3 text-xl font-bold leading-snug text-deep-950 outline-none transition focus:border-ink-950 focus:ring-2 focus:ring-ink-950/10 dark:border-white/15 dark:bg-deep-950 dark:text-white sm:text-2xl"
         aria-label="Editable generated sentence"
         placeholder="Translated signs appear here"
       />
