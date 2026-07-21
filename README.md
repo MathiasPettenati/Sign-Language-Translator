@@ -22,35 +22,7 @@ isolated signs and practical fingerspelling hand shapes.
 - Python preprocessing, training, evaluation, and TensorFlow Lite export scripts.
 - Vitest unit tests and Playwright smoke test.
 
-## Project Structure
 
-```text
-.
-├── frontend/
-│   ├── public/models/
-│   │   ├── README.md
-│   │   └── labels.json
-│   ├── src/
-│   │   ├── components/
-│   │   ├── hooks/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── types/
-│   │   └── utils/
-│   └── package.json
-├── training/
-│   ├── data/
-│   ├── notebooks/
-│   ├── collect_data.py
-│   ├── preprocess.py
-│   ├── train.py
-│   ├── evaluate.py
-│   ├── export_model.py
-│   └── requirements.txt
-├── tests/e2e/
-├── .github/workflows/frontend.yml
-└── README.md
-```
 
 ## Frontend Setup
 
