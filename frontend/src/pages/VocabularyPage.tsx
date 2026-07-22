@@ -1,5 +1,6 @@
 import { BookOpen, CheckCircle2, Clock3 } from "lucide-react";
 
+import { BrandMark } from "../components/BrandMark";
 import {
   FINGERSPELLING_LABELS,
   TARGET_VOCABULARY,
@@ -19,7 +20,10 @@ export function VocabularyPage() {
   return (
     <main className="space-y-6">
       <section className="surface surface-feature p-4 sm:p-5">
-        <p className="eyebrow">Translation vocabulary</p>
+        <div className="flex items-center gap-3">
+          <BrandMark className="h-14 w-14 shrink-0" />
+          <p className="eyebrow">Translation vocabulary</p>
+        </div>
         <h1 className="mt-1 text-3xl font-semibold text-deep-950 dark:text-white sm:text-4xl">
           Signs the translator can speak
         </h1>

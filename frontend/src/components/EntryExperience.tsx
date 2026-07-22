@@ -2,8 +2,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
+import { BrandMark } from "./BrandMark";
+
 const TRANSITION_MS = 1_050;
 const GLASSES_MODEL_URL = "/models/glasses/scene.gltf";
+const GLASSES_REST_Y = -0.34;
 
 type EntryExperienceProps = {
   reducedMotion: boolean;
@@ -106,10 +109,10 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
       },
     );
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.62);
-    const key = new THREE.DirectionalLight(0xffffff, 3.2);
+    const ambient = new THREE.AmbientLight(0xfff4d7, 0.7);
+    const key = new THREE.DirectionalLight(0xffe7a8, 3.35);
     key.position.set(-2.8, 4, 5);
-    const rim = new THREE.PointLight(0xffffff, 3.6, 10);
+    const rim = new THREE.PointLight(0xcaa661, 3.8, 10);
     rim.position.set(2.8, 1.5, 2.8);
     scene.add(ambient, key, rim);
 
@@ -151,12 +154,12 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
 
         glasses.scale.setScalar(scale);
         glasses.position.z = eased * 4.9;
-        glasses.position.y = eased * 0.1;
+        glasses.position.y = GLASSES_REST_Y + eased * 0.1;
         glasses.rotation.x += (-0.02 - glasses.rotation.x) * 0.08;
         glasses.rotation.y += (-0.04 - glasses.rotation.y) * 0.08;
       } else {
         glasses.scale.setScalar(baseScaleRef.current);
-        glasses.position.y = Math.sin(timeMs * 0.001) * 0.045;
+        glasses.position.y = GLASSES_REST_Y + Math.sin(timeMs * 0.001) * 0.045;
         glasses.rotation.x += (pointer.y * -0.12 - glasses.rotation.x) * 0.06;
         glasses.rotation.y += (pointer.x * 0.22 - glasses.rotation.y) * 0.06;
         glasses.rotation.z = Math.sin(timeMs * 0.0007) * 0.018;
@@ -186,9 +189,10 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
         aria-label="Interactive AR glasses"
       />
       <div className="entry-copy" aria-hidden="true">
+        <BrandMark className="entry-logo" />
         <p className="entry-kicker">Handspeak</p>
         <h1>Sign language, heard clearly.</h1>
-        <p>Optical translation interface</p>
+        <p>Signal translation interface</p>
       </div>
       <button
         type="button"
@@ -247,9 +251,9 @@ function styleLoadedModel(model: THREE.Object3D): void {
 
       const isGlass = material.name.toLowerCase().includes("glass");
       material.map = null;
-      material.color.set(isGlass ? 0x08090a : 0x737373);
-      material.metalness = isGlass ? 0.18 : 0.82;
-      material.roughness = isGlass ? 0.2 : 0.32;
+      material.color.set(isGlass ? 0x171815 : 0xcaa661);
+      material.metalness = isGlass ? 0.18 : 0.9;
+      material.roughness = isGlass ? 0.22 : 0.26;
       material.transparent = isGlass;
       material.opacity = isGlass ? 0.66 : 1;
       material.side = THREE.DoubleSide;
@@ -262,12 +266,12 @@ function createFallbackGlasses(): THREE.Group {
   const group = new THREE.Group();
 
   const frameMaterial = new THREE.MeshStandardMaterial({
-    color: 0xd8dcdf,
+    color: 0xcaa661,
     metalness: 0.9,
     roughness: 0.24,
   });
   const lensMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x0b0c0d,
+    color: 0x171815,
     metalness: 0.08,
     roughness: 0.12,
     transparent: true,
@@ -275,7 +279,7 @@ function createFallbackGlasses(): THREE.Group {
     side: THREE.DoubleSide,
   });
   const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0xf6f7f8,
+    color: 0xffe6a6,
     transparent: true,
     opacity: 0.36,
   });
@@ -422,7 +426,7 @@ function createAtmosphere(): THREE.Points {
   return new THREE.Points(
     geometry,
     new THREE.PointsMaterial({
-      color: 0x111518,
+      color: 0xcaa661,
       size: 0.018,
       transparent: true,
       opacity: 0.12,

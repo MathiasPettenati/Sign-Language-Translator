@@ -1,7 +1,8 @@
-import { BookOpen, HandHeart, Languages } from "lucide-react";
+import { BookOpen, Languages } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { DEFAULT_RECOGNITION_SETTINGS, LOCAL_STORAGE_KEYS } from "./constants/vocabulary";
+import { BrandMark } from "./components/BrandMark";
 import { EntryExperience } from "./components/EntryExperience";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { RecognizerPage } from "./pages/RecognizerPage";
@@ -54,14 +55,12 @@ export function App() {
 
   return (
     <div className="app-shell min-h-screen bg-app text-ink-900 dark:bg-deep-950 dark:text-white">
-      <header className="sticky top-0 z-20 border-b border-ink-200 bg-white/90 text-ink-950 backdrop-blur dark:border-white/10 dark:bg-deep-950/90 dark:text-white">
+      <header className="sticky top-0 z-20 border-b border-gold-300/60 bg-paper-light/90 text-ink-950 backdrop-blur dark:border-gold-700/40 dark:bg-deep-950/90 dark:text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-full border border-ink-950 bg-ink-950 text-white dark:border-white dark:bg-white dark:text-deep-950">
-              <HandHeart className="h-5 w-5" aria-hidden="true" />
-            </div>
-            <div>
-              <p className="text-xs font-bold uppercase text-ink-700 dark:text-ink-100">Handspeak</p>
+            <BrandMark className="h-12 w-12 shrink-0" title="Handspeak logo" />
+            <div className="sr-only">
+              <p className="text-xs font-bold uppercase text-gold-700 dark:text-gold-200">Handspeak</p>
               <p className="text-sm font-bold text-ink-950 dark:text-white">Live Sign Translator</p>
             </div>
           </div>

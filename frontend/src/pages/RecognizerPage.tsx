@@ -1,5 +1,6 @@
 import { Languages, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
 
+import { BrandMark } from "../components/BrandMark";
 import { CameraStage } from "../components/CameraStage";
 import { ConfidenceMeter } from "../components/ConfidenceMeter";
 import { ErrorBanner } from "../components/ErrorBanner";
@@ -28,12 +29,15 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
         <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-5 lg:grid-cols-[minmax(0,1.35fr)_360px]">
           <div className="min-w-0 space-y-4">
             <div className="hero-copy">
-              <p className="eyebrow">Translation desk</p>
+              <div className="flex items-center gap-3">
+                <BrandMark className="h-16 w-16 shrink-0" />
+                <p className="eyebrow">Translation desk</p>
+              </div>
               <h1 className="news-headline mt-2 max-w-3xl">
                 Signs In. Speech Out.
               </h1>
               <p className="news-deck mt-4 max-w-2xl">
-                A crisp front-page view for live signing, editable copy, and spoken delivery.
+                A warm signal-first workspace for live signing, editable copy, and spoken delivery.
               </p>
               <div className="mt-5 grid gap-3 sm:grid-cols-3">
                 <div className="hero-stat">

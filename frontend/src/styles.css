@@ -6,33 +6,43 @@
   color-scheme: light;
   font-family: "Times New Roman", Times, serif;
   font-feature-settings: normal;
-  --paper: #f4f4f4;
-  --paper-light: #ffffff;
-  --ink: #111111;
-  --rule: #d9d9d9;
-  --accent: #303030;
-  --accent-soft: #f0f0f0;
+  --paper: #f4f5ef;
+  --paper-light: #fffefa;
+  --ink: #29231b;
+  --rule: #dfd0af;
+  --accent: #a97d2b;
+  --accent-strong: #674a1c;
+  --accent-soft: #fbf2db;
+  --sage: #64715b;
 }
 
 :root.dark {
   color-scheme: dark;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   letter-spacing: 0;
+  border-radius: 0 !important;
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 48%, #eeeeee 100%);
+  background:
+    linear-gradient(90deg, rgba(100, 113, 91, 0.045) 0 1px, transparent 1px 100%),
+    linear-gradient(180deg, #fffefa 0%, #f4f5ef 50%, #ebece4 100%);
+  background-size: 28px 100%, auto;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 :root.dark body {
-  background: linear-gradient(180deg, #111111 0%, #1a1a1a 54%, #0f0f0f 100%);
+  background:
+    linear-gradient(90deg, rgba(221, 186, 103, 0.06) 0 1px, transparent 1px 100%),
+    linear-gradient(180deg, #171815 0%, #20211d 54%, #10120f 100%);
 }
 
 button,
@@ -46,7 +56,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #111111;
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -60,25 +70,36 @@ textarea:focus-visible {
 }
 
 @layer components {
+  .brand-mark {
+    display: block;
+    overflow: visible;
+    object-fit: contain;
+    object-position: center;
+  }
+
   .entry-screen {
     @apply relative min-h-screen overflow-hidden bg-app text-ink-950;
     background:
-      linear-gradient(145deg, rgba(240, 240, 240, 0.86) 0%, rgba(255, 255, 255, 0.2) 42%),
-      linear-gradient(180deg, #ffffff 0%, #f2f2f2 100%);
+      repeating-radial-gradient(ellipse at 50% 58%, transparent 0 54px, rgba(199, 157, 67, 0.13) 55px 56px, transparent 57px 72px),
+      linear-gradient(145deg, rgba(255, 254, 250, 0.96) 0%, rgba(239, 241, 232, 0.78) 54%),
+      linear-gradient(180deg, #fffefa 0%, #ebece4 100%);
     transition: opacity 420ms ease 760ms;
   }
 
   .entry-screen::before {
     @apply pointer-events-none absolute inset-0;
     content: "";
-    background: linear-gradient(120deg, transparent 0%, rgba(17, 17, 17, 0.08) 48%, transparent 100%);
-    opacity: 0.8;
+    background:
+      linear-gradient(120deg, transparent 0%, rgba(169, 125, 43, 0.12) 48%, transparent 100%),
+      linear-gradient(90deg, rgba(100, 113, 91, 0.08) 0 1px, transparent 1px 100%);
+    background-size: auto, 34px 100%;
+    opacity: 0.9;
   }
 
   .entry-screen::after {
     @apply pointer-events-none absolute inset-x-0 bottom-0 h-48;
     content: "";
-    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.72));
+    background: linear-gradient(180deg, transparent, rgba(255, 254, 250, 0.84));
   }
 
   .entry-screen.is-launching {
@@ -90,19 +111,23 @@ textarea:focus-visible {
   }
 
   .entry-copy {
-    @apply pointer-events-none absolute left-1/2 top-10 w-[min(680px,calc(100%-32px))] -translate-x-1/2 text-center sm:top-14;
+    @apply pointer-events-none absolute left-1/2 top-8 w-[min(720px,calc(100%-32px))] -translate-x-1/2 text-center sm:top-10;
+  }
+
+  .entry-logo {
+    @apply mx-auto h-28 w-28 sm:h-36 sm:w-36;
   }
 
   .entry-copy h1 {
-    @apply mt-3 text-4xl font-semibold leading-none text-ink-950 sm:text-6xl;
+    @apply mt-2 text-4xl font-semibold leading-none text-ink-950 sm:text-6xl;
   }
 
   .entry-copy p:last-child {
-    @apply mt-4 text-sm font-medium uppercase text-ink-600;
+    @apply mt-4 text-sm font-bold uppercase text-sage-700;
   }
 
   .entry-kicker {
-    @apply text-xs font-semibold uppercase text-ink-500;
+    @apply mt-1 text-xs font-bold uppercase text-gold-700;
   }
 
   .entry-activate {
@@ -110,11 +135,11 @@ textarea:focus-visible {
   }
 
   .entry-credit {
-    @apply absolute bottom-4 right-4 z-10 text-xs text-ink-500;
+    @apply absolute bottom-4 right-4 z-10 text-xs text-ink-600;
   }
 
   .entry-credit a {
-    @apply text-ink-700 underline decoration-ink-300 underline-offset-4 hover:text-ink-950;
+    @apply text-gold-700 underline decoration-gold-300 underline-offset-4 hover:text-gold-900;
   }
 
   .app-shell {
@@ -122,19 +147,19 @@ textarea:focus-visible {
   }
 
   .surface {
-    @apply border border-ink-200 bg-white/90 dark:border-white/10 dark:bg-deep-900/90;
-    border-radius: 8px;
-    box-shadow: 0 16px 40px rgba(17, 17, 17, 0.08);
+    @apply border border-gold-200/80 bg-paper-light/90 dark:border-gold-800/50 dark:bg-deep-900/90;
+    box-shadow: 0 16px 40px rgba(74, 53, 22, 0.1);
   }
 
   .surface-feature {
-    @apply border-ink-200 bg-white;
-    background: linear-gradient(135deg, #ffffff 0%, #eeeeee 100%);
+    @apply border-gold-200/80 bg-paper-light;
+    background:
+      repeating-radial-gradient(ellipse at 94% 6%, transparent 0 24px, rgba(199, 157, 67, 0.13) 25px 26px, transparent 27px 42px),
+      linear-gradient(135deg, #fffefa 0%, #edf0e6 100%);
   }
 
   .surface-muted {
-    @apply border border-ink-200 bg-ink-50/80 dark:border-white/10 dark:bg-white/5;
-    border-radius: 8px;
+    @apply border border-gold-200/70 bg-gold-50/60 dark:border-gold-800/50 dark:bg-white/5;
   }
 
   .section-title {
@@ -142,36 +167,32 @@ textarea:focus-visible {
   }
 
   .eyebrow {
-    @apply text-sm font-bold uppercase text-ink-700 dark:text-ink-200;
+    @apply text-sm font-bold uppercase text-gold-700 dark:text-gold-200;
   }
 
   .chip {
-    @apply inline-flex items-center gap-1.5 border border-ink-300 bg-ink-50 px-2.5 py-1 text-xs font-bold text-ink-950 dark:border-white/20 dark:bg-white/10 dark:text-ink-50;
-    border-radius: 999px;
+    @apply inline-flex items-center gap-1.5 border border-gold-300 bg-gold-50 px-2.5 py-1 text-xs font-bold text-ink-950 dark:border-gold-700/70 dark:bg-gold-900/30 dark:text-gold-50;
   }
 
   .chip-neutral {
-    @apply border-ink-200 bg-white text-ink-700 dark:border-white/15 dark:bg-white/10 dark:text-ink-100;
+    @apply border-sage-200 bg-paper-light text-sage-700 dark:border-sage-600/70 dark:bg-white/10 dark:text-sage-100;
   }
 
   .stat-card {
-    @apply border border-ink-200 bg-white/80 p-3 text-sm transition-colors dark:border-white/10 dark:bg-white/5;
-    border-radius: 8px;
+    @apply border border-gold-200/75 bg-paper-light/80 p-3 text-sm transition-colors dark:border-gold-800/50 dark:bg-white/5;
   }
 
   .stat-panel {
-    @apply border-ink-200 bg-white;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(240, 240, 240, 0.88));
+    @apply border-gold-200/80 bg-paper-light;
+    background: linear-gradient(180deg, rgba(255, 254, 250, 0.98), rgba(239, 241, 232, 0.88));
   }
 
   .list-row {
-    @apply border border-ink-200 bg-white/80 transition-colors hover:border-ink-500 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:hover:border-white/30 dark:hover:bg-white/10;
-    border-radius: 8px;
+    @apply border border-gold-200/70 bg-paper-light/80 transition-colors hover:border-gold-500 hover:bg-white dark:border-gold-800/50 dark:bg-white/5 dark:hover:border-gold-500/70 dark:hover:bg-white/10;
   }
 
   .nav-button {
-    @apply inline-flex items-center gap-2 border border-transparent px-3 py-2 text-sm font-bold text-ink-700 hover:border-ink-300 hover:bg-white hover:text-ink-950 active:bg-ink-950 active:text-white dark:text-ink-50/75 dark:hover:border-white/30 dark:hover:bg-white/10 dark:hover:text-white;
-    border-radius: 999px;
+    @apply inline-flex items-center gap-2 border border-transparent px-3 py-2 text-sm font-bold text-ink-700 hover:border-gold-300 hover:bg-gold-50 hover:text-ink-950 active:bg-gold-700 active:text-white dark:text-ink-50/75 dark:hover:border-gold-500/50 dark:hover:bg-white/10 dark:hover:text-white;
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -179,13 +200,12 @@ textarea:focus-visible {
   }
 
   .nav-button.active {
-    @apply border-ink-950 bg-ink-950 text-white hover:bg-ink-800 dark:border-white dark:bg-white dark:text-deep-950 dark:hover:bg-ink-100;
+    @apply border-gold-700 bg-gold-600 text-white hover:bg-gold-700 dark:border-gold-300 dark:bg-gold-300 dark:text-deep-950 dark:hover:bg-gold-200;
   }
 
   .button-primary {
-    @apply inline-flex items-center justify-center gap-2 border border-ink-950 bg-ink-950 px-3 py-2 text-sm font-bold text-white hover:bg-white hover:text-ink-950 active:bg-ink-800 active:text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-white dark:bg-white dark:text-deep-950 dark:hover:bg-deep-950 dark:hover:text-white;
-    border-radius: 999px;
-    box-shadow: 0 8px 20px rgba(17, 17, 17, 0.16);
+    @apply inline-flex items-center justify-center gap-2 border border-gold-700 bg-gold-600 px-3 py-2 text-sm font-bold text-white hover:bg-paper-light hover:text-gold-800 active:bg-gold-800 active:text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-gold-300 dark:bg-gold-300 dark:text-deep-950 dark:hover:bg-deep-950 dark:hover:text-gold-100;
+    box-shadow: 0 8px 20px rgba(103, 74, 28, 0.22);
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -193,8 +213,7 @@ textarea:focus-visible {
   }
 
   .button-secondary {
-    @apply inline-flex items-center justify-center gap-2 border border-ink-200 bg-white px-3 py-2 text-sm font-bold text-deep-900 hover:border-ink-950 hover:bg-ink-950 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-white/15 dark:bg-deep-950 dark:text-ink-50 dark:hover:border-white dark:hover:bg-white dark:hover:text-deep-950;
-    border-radius: 999px;
+    @apply inline-flex items-center justify-center gap-2 border border-gold-200 bg-paper-light px-3 py-2 text-sm font-bold text-deep-900 hover:border-gold-700 hover:bg-gold-700 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-gold-800/50 dark:bg-deep-950 dark:text-ink-50 dark:hover:border-gold-300 dark:hover:bg-gold-300 dark:hover:text-deep-950;
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -202,8 +221,7 @@ textarea:focus-visible {
   }
 
   .icon-button {
-    @apply inline-flex h-9 w-9 items-center justify-center border border-ink-200 bg-white text-deep-800 hover:border-ink-950 hover:bg-ink-950 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-white/15 dark:bg-deep-950 dark:text-ink-50 dark:hover:border-white dark:hover:bg-white dark:hover:text-deep-950;
-    border-radius: 999px;
+    @apply inline-flex h-9 w-9 items-center justify-center border border-gold-200 bg-paper-light text-deep-800 hover:border-gold-700 hover:bg-gold-700 hover:text-white disabled:cursor-not-allowed disabled:opacity-50 dark:border-gold-800/50 dark:bg-deep-950 dark:text-ink-50 dark:hover:border-gold-300 dark:hover:bg-gold-300 dark:hover:text-deep-950;
     transition:
       background-color 160ms ease,
       border-color 160ms ease,
@@ -221,8 +239,7 @@ textarea:focus-visible {
   .field-label input,
   .field-label select,
   .field-label textarea {
-    @apply w-full border border-ink-200 bg-white px-3 py-2 text-sm text-deep-950 outline-none hover:bg-paper focus:border-ink-950 focus:ring-2 focus:ring-ink-950/10 dark:border-white/15 dark:bg-deep-950 dark:text-white dark:hover:border-white/50;
-    border-radius: 8px;
+    @apply w-full border border-gold-200 bg-paper-light px-3 py-2 text-sm text-deep-950 outline-none hover:bg-gold-50 focus:border-gold-700 focus:ring-2 focus:ring-gold-500/20 dark:border-gold-800/50 dark:bg-deep-950 dark:text-white dark:hover:border-gold-500/50;
     transition:
       border-color 160ms ease,
       box-shadow 160ms ease;
@@ -233,7 +250,7 @@ textarea:focus-visible {
   }
 
   .setting-row input[type="range"] {
-    @apply w-full accent-ink-950 dark:accent-white;
+    @apply w-full accent-gold-600 dark:accent-gold-300;
   }
 
   .setting-row output {
@@ -241,23 +258,23 @@ textarea:focus-visible {
   }
 
   .check-row {
-    @apply flex items-center gap-2 border border-ink-200 bg-white px-3 py-2 text-sm font-bold text-deep-800 transition-colors hover:border-ink-500 hover:bg-paper dark:border-white/15 dark:bg-deep-950 dark:text-ink-50 dark:hover:border-white/50 dark:hover:bg-deep-900;
-    border-radius: 8px;
+    @apply flex items-center gap-2 border border-gold-200 bg-paper-light px-3 py-2 text-sm font-bold text-deep-800 transition-colors hover:border-gold-500 hover:bg-gold-50 dark:border-gold-800/50 dark:bg-deep-950 dark:text-ink-50 dark:hover:border-gold-500/50 dark:hover:bg-deep-900;
   }
 
   .check-row input {
-    @apply h-4 w-4 accent-ink-950 dark:accent-white;
+    @apply h-4 w-4 accent-gold-600 dark:accent-gold-300;
   }
 
   .translation-hero {
-    @apply relative overflow-hidden border border-ink-200 bg-paper text-ink-950 dark:border-white/10 dark:bg-deep-950 dark:text-white;
-    background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 52%, #e8e8e8 100%);
-    border-radius: 8px;
-    box-shadow: 0 18px 54px rgba(17, 17, 17, 0.1);
+    @apply relative overflow-hidden border border-gold-200 bg-paper text-ink-950 dark:border-gold-800/50 dark:bg-deep-950 dark:text-white;
+    background:
+      repeating-radial-gradient(ellipse at 87% 10%, transparent 0 28px, rgba(199, 157, 67, 0.12) 29px 30px, transparent 31px 46px),
+      linear-gradient(135deg, #fffefa 0%, #f3f0e7 58%, #e7ecdf 100%);
+    box-shadow: 0 18px 54px rgba(74, 53, 22, 0.12);
   }
 
   .translation-hero::before {
-    @apply pointer-events-none absolute inset-x-0 top-0 h-1 bg-ink-700 dark:bg-ink-100;
+    @apply pointer-events-none absolute inset-x-0 top-0 h-1 bg-gold-500 dark:bg-gold-300;
     content: "";
   }
 
@@ -266,7 +283,7 @@ textarea:focus-visible {
   }
 
   .hero-copy {
-    @apply border-b border-ink-200 bg-transparent pb-5 dark:border-white/15;
+    @apply border-b border-gold-200/80 bg-transparent pb-5 dark:border-gold-800/50;
   }
 
   .news-headline {
@@ -274,36 +291,41 @@ textarea:focus-visible {
   }
 
   .news-deck {
-    @apply border-l-4 border-ink-700 pl-3 text-base font-bold leading-6 text-ink-700 dark:border-ink-100 dark:text-ink-50/80 sm:text-lg;
-    border-radius: 4px;
+    @apply border-l-4 border-gold-500 pl-3 text-base font-bold leading-6 text-ink-700 dark:border-gold-300 dark:text-ink-50/80 sm:text-lg;
   }
 
   .hero-stat {
-    @apply inline-flex min-h-10 items-center gap-2 border border-ink-200 bg-white px-3 py-2 text-sm font-bold text-ink-950 dark:border-white/15 dark:bg-white/10 dark:text-white;
-    border-radius: 999px;
+    @apply inline-flex min-h-10 items-center gap-2 border border-gold-200 bg-paper-light px-3 py-2 text-sm font-bold text-ink-950 dark:border-gold-800/50 dark:bg-white/10 dark:text-white;
   }
 
   .hero-stat svg {
-    @apply text-ink-700 dark:text-ink-100;
+    @apply text-gold-700 dark:text-gold-200;
+  }
+
+  .hero-stat:nth-child(2) {
+    @apply border-sage-200 dark:border-sage-600/60;
+  }
+
+  .hero-stat:nth-child(2) svg {
+    @apply text-sage-700 dark:text-sage-200;
   }
 
   .translation-panel {
-    @apply border border-ink-200 bg-white/90 text-deep-950 dark:border-white/10 dark:bg-deep-900 dark:text-white;
-    border-radius: 8px;
-    box-shadow: 0 12px 32px rgba(17, 17, 17, 0.08);
+    @apply border border-gold-200/80 bg-paper-light/90 text-deep-950 dark:border-gold-800/50 dark:bg-deep-900 dark:text-white;
+    box-shadow: 0 12px 32px rgba(74, 53, 22, 0.1);
   }
 
   .current-translation {
     box-shadow:
-      0 12px 32px rgba(17, 17, 17, 0.08),
-      inset 0 -3px 0 rgba(17, 17, 17, 0.16);
+      0 12px 32px rgba(74, 53, 22, 0.1),
+      inset 0 -3px 0 rgba(169, 125, 43, 0.38);
   }
 
   .news-signline {
     color: var(--ink);
-    font-size: 3.5rem;
+    font-size: 3.25rem;
     font-weight: 900;
-    line-height: 0.92;
+    line-height: 1.02;
     overflow-wrap: anywhere;
   }
 
@@ -315,7 +337,7 @@ textarea:focus-visible {
 @media (min-width: 640px) {
   @layer components {
     .news-signline {
-      font-size: 4.5rem;
+      font-size: 4rem;
     }
   }
 }

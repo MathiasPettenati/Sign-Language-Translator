@@ -80,7 +80,7 @@ export function SentenceBuilder({
         value={sentence}
         onChange={(event) => onSentenceChange(event.target.value)}
         rows={3}
-        className="mt-4 min-h-24 w-full resize-y rounded-lg border border-ink-200 bg-white p-3 text-xl font-bold leading-snug text-deep-950 outline-none transition focus:border-ink-950 focus:ring-2 focus:ring-ink-950/10 dark:border-white/15 dark:bg-deep-950 dark:text-white sm:text-2xl"
+        className="mt-4 min-h-24 w-full resize-y border border-gold-200 bg-paper-light p-3 text-xl font-bold leading-snug text-deep-950 outline-none transition focus:border-gold-700 focus:ring-2 focus:ring-gold-500/20 dark:border-gold-800/50 dark:bg-deep-950 dark:text-white sm:text-2xl"
         aria-label="Editable generated sentence"
         placeholder="Translated signs appear here"
       />
