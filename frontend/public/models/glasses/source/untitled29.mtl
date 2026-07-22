@@ -1,0 +1,53 @@
+# Material definitions reconstructed for the OBJ's referenced material names.
+# The downloaded archive includes the OBJ and texture maps, but not this MTL file.
+
+newmtl 002_01
+Ka 0.95 0.95 0.95
+Kd 0.92 0.93 0.94
+Ks 0.55 0.58 0.62
+Ns 96
+illum 2
+map_Kd ../textures/G09_02.jpg
+bump ../textures/G09_n.png
+
+newmtl 002_02
+Ka 0.95 0.95 0.95
+Kd 0.96 0.96 0.96
+Ks 0.42 0.45 0.48
+Ns 72
+illum 2
+map_Kd ../textures/G09_02.jpg
+bump ../textures/G09_n.png
+
+newmtl 002_03_B
+Ka 0.02 0.02 0.02
+Kd 0.015 0.016 0.018
+Ks 0.2 0.2 0.22
+Ns 48
+illum 2
+
+newmtl 002_04_S
+Ka 0.72 0.74 0.78
+Kd 0.76 0.79 0.83
+Ks 0.9 0.92 0.95
+Ns 180
+illum 2
+bump ../textures/G09_n.png
+
+newmtl 002_05
+Ka 0.88 0.88 0.88
+Kd 0.86 0.87 0.89
+Ks 0.45 0.47 0.5
+Ns 88
+illum 2
+map_Kd ../textures/G09_02.jpg
+bump ../textures/G09_n.png
+
+newmtl 001_G
+Ka 0.62 0.68 0.74
+Kd 0.72 0.8 0.88
+Ks 0.9 0.94 1
+Ns 220
+d 0.38
+Ni 1.45
+illum 4

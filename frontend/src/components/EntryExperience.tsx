@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
 import { BrandMark } from "./BrandMark";
 
 const TRANSITION_MS = 1_050;
-const GLASSES_MODEL_URL = "/models/glasses/scene.gltf";
-const GLASSES_REST_Y = -0.34;
+const GLASSES_MODEL_URL = "/models/glasses/source/untitled29.obj";
+const GLASSES_MATERIAL_PATH = "/models/glasses/source/";
+const GLASSES_MATERIAL_FILE = "untitled29.mtl";
+const GLASSES_REST_Y = -0.58;
 
 type EntryExperienceProps = {
   reducedMotion: boolean;
@@ -95,24 +98,39 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
     scene.add(glasses);
     scene.add(createAtmosphere());
 
-    const loader = new GLTFLoader();
-    loader.load(
-      GLASSES_MODEL_URL,
-      (gltf) => {
-        const loadedGlasses = normalizeGlassesModel(gltf.scene);
-        fallbackGlasses.visible = false;
-        glasses.add(loadedGlasses);
+    const loadModel = (loader: OBJLoader) => {
+      loader.load(
+        GLASSES_MODEL_URL,
+        (object) => {
+          const loadedGlasses = normalizeGlassesModel(object);
+          fallbackGlasses.visible = false;
+          glasses.add(loadedGlasses);
+        },
+        undefined,
+        () => {
+          fallbackGlasses.visible = true;
+        },
+      );
+    };
+
+    const loader = new OBJLoader();
+    const materialLoader = new MTLLoader();
+    materialLoader.setPath(GLASSES_MATERIAL_PATH);
+    materialLoader.load(
+      GLASSES_MATERIAL_FILE,
+      (materials) => {
+        materials.preload();
+        loader.setMaterials(materials);
+        loadModel(loader);
       },
       undefined,
-      () => {
-        fallbackGlasses.visible = true;
-      },
+      () => loadModel(loader),
     );
 
-    const ambient = new THREE.AmbientLight(0xfff4d7, 0.7);
-    const key = new THREE.DirectionalLight(0xffe7a8, 3.35);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.7);
+    const key = new THREE.DirectionalLight(0xf8fafc, 3.35);
     key.position.set(-2.8, 4, 5);
-    const rim = new THREE.PointLight(0xcaa661, 3.8, 10);
+    const rim = new THREE.PointLight(0xcbd5e1, 3.8, 10);
     rim.position.set(2.8, 1.5, 2.8);
     scene.add(ambient, key, rim);
 
@@ -202,21 +220,13 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
       />
       <p className="entry-credit">
         Model:{" "}
-        <a
-          href="https://sketchfab.com/3d-models/glasses-69b4b065ad2242d5b1192b58a006a54e"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Glasses
-        </a>{" "}
-        by photon
+        Glasses 09
       </p>
     </main>
   );
 }
 
 function normalizeGlassesModel(model: THREE.Object3D): THREE.Group {
-  styleLoadedModel(model);
   model.updateMatrixWorld(true);
 
   const box = new THREE.Box3().setFromObject(model);
@@ -235,43 +245,16 @@ function normalizeGlassesModel(model: THREE.Object3D): THREE.Group {
   return pivot;
 }
 
-function styleLoadedModel(model: THREE.Object3D): void {
-  model.traverse((child) => {
-    if (!(child instanceof THREE.Mesh)) {
-      return;
-    }
-
-    child.frustumCulled = false;
-    const materials = Array.isArray(child.material) ? child.material : [child.material];
-
-    materials.forEach((material) => {
-      if (!(material instanceof THREE.MeshStandardMaterial || material instanceof THREE.MeshPhysicalMaterial)) {
-        return;
-      }
-
-      const isGlass = material.name.toLowerCase().includes("glass");
-      material.map = null;
-      material.color.set(isGlass ? 0x171815 : 0xcaa661);
-      material.metalness = isGlass ? 0.18 : 0.9;
-      material.roughness = isGlass ? 0.22 : 0.26;
-      material.transparent = isGlass;
-      material.opacity = isGlass ? 0.66 : 1;
-      material.side = THREE.DoubleSide;
-      material.needsUpdate = true;
-    });
-  });
-}
-
 function createFallbackGlasses(): THREE.Group {
   const group = new THREE.Group();
 
   const frameMaterial = new THREE.MeshStandardMaterial({
-    color: 0xcaa661,
+    color: 0xcbd5e1,
     metalness: 0.9,
     roughness: 0.24,
   });
   const lensMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x171815,
+    color: 0x11151c,
     metalness: 0.08,
     roughness: 0.12,
     transparent: true,
@@ -279,7 +262,7 @@ function createFallbackGlasses(): THREE.Group {
     side: THREE.DoubleSide,
   });
   const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0xffe6a6,
+    color: 0xf8fafc,
     transparent: true,
     opacity: 0.36,
   });
@@ -426,7 +409,7 @@ function createAtmosphere(): THREE.Points {
   return new THREE.Points(
     geometry,
     new THREE.PointsMaterial({
-      color: 0xcaa661,
+      color: 0xcbd5e1,
       size: 0.018,
       transparent: true,
       opacity: 0.12,
