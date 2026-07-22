@@ -1,36 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="340 106 344 326" role="img" aria-label="Handspeak logo">
   <defs>
-    <linearGradient id="gold" x1="446" x2="586" y1="120" y2="378" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#fff0bf" />
-      <stop offset="0.18" stop-color="#c9a868" />
-      <stop offset="0.46" stop-color="#8b6a31" />
-      <stop offset="0.73" stop-color="#c6a25e" />
-      <stop offset="1" stop-color="#fff0b9" />
+    <linearGradient id="silver" x1="446" x2="586" y1="120" y2="378" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset="0.18" stop-color="#d7dde6" />
+      <stop offset="0.46" stop-color="#7d8795" />
+      <stop offset="0.73" stop-color="#c1cad6" />
+      <stop offset="1" stop-color="#f8fafc" />
     </linearGradient>
-    <linearGradient id="gold-shadow" x1="438" x2="593" y1="121" y2="379" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#f9e7b5" />
-      <stop offset="0.5" stop-color="#74531e" />
-      <stop offset="1" stop-color="#e8ca82" />
+    <linearGradient id="silver-shadow" x1="438" x2="593" y1="121" y2="379" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8fafc" />
+      <stop offset="0.5" stop-color="#475569" />
+      <stop offset="1" stop-color="#d7dde6" />
     </linearGradient>
     <linearGradient id="signal" x1="364" x2="660" y1="210" y2="410" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#cfaa65" stop-opacity="0" />
-      <stop offset="0.22" stop-color="#cba45f" stop-opacity="0.62" />
-      <stop offset="0.5" stop-color="#cba45f" stop-opacity="0.18" />
-      <stop offset="0.78" stop-color="#cba45f" stop-opacity="0.62" />
-      <stop offset="1" stop-color="#cfaa65" stop-opacity="0" />
+      <stop offset="0" stop-color="#cbd5e1" stop-opacity="0" />
+      <stop offset="0.22" stop-color="#cbd5e1" stop-opacity="0.62" />
+      <stop offset="0.5" stop-color="#cbd5e1" stop-opacity="0.18" />
+      <stop offset="0.78" stop-color="#cbd5e1" stop-opacity="0.62" />
+      <stop offset="1" stop-color="#cbd5e1" stop-opacity="0" />
     </linearGradient>
     <radialGradient id="orb" cx="35%" cy="28%" r="70%">
-      <stop offset="0" stop-color="#fff2c6" />
-      <stop offset="0.28" stop-color="#d3af69" />
-      <stop offset="0.62" stop-color="#806126" />
-      <stop offset="1" stop-color="#f3d58b" />
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset="0.28" stop-color="#d7dde6" />
+      <stop offset="0.62" stop-color="#64748b" />
+      <stop offset="1" stop-color="#eef2f7" />
     </radialGradient>
     <filter id="hand-lift" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#563b13" flood-opacity="0.34" />
-      <feDropShadow dx="0" dy="-1" stdDeviation="0.8" flood-color="#fff6d0" flood-opacity="0.58" />
+      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#1e293b" flood-opacity="0.34" />
+      <feDropShadow dx="0" dy="-1" stdDeviation="0.8" flood-color="#ffffff" flood-opacity="0.58" />
     </filter>
     <filter id="orb-lift" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="3" stdDeviation="2.4" flood-color="#5b3f14" flood-opacity="0.36" />
+      <feDropShadow dx="0" dy="3" stdDeviation="2.4" flood-color="#1e293b" flood-opacity="0.36" />
     </filter>
   </defs>
 
@@ -48,21 +48,21 @@
   </g>
 
   <g filter="url(#hand-lift)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <g stroke="#6b4d20" stroke-width="10.5" opacity="0.2">
+    <g stroke="#475569" stroke-width="10.5" opacity="0.2">
       <path d="M475 343v-31c-16-10-26-27-27-47-1-12 5-22 16-25 9-2 17 2 24 13l16 25c5 9 16 11 23 5 8-7 7-18-1-26l-34-35c-9-10-9-23-1-31 8-8 20-5 27 6l30 44-1-93c0-13 8-22 20-22 11 0 19 9 19 22l1 92 27-76c4-12 14-18 25-14 11 4 15 16 11 28l-38 114c-9 31-34 49-69 49-20 0-38-6-53-18" />
       <path d="M505 248 457 166c-6-11-3-24 8-29 10-5 21 2 26 13l39 90" />
       <path d="M472 257c15 31 38 48 67 50" />
       <path d="M520 284c-1 25-18 42-45 40" />
       <path d="M492 326c10 10 25 15 45 14" />
     </g>
-    <g stroke="url(#gold-shadow)" stroke-width="7.2">
+    <g stroke="url(#silver-shadow)" stroke-width="7.2">
       <path d="M475 343v-31c-16-10-26-27-27-47-1-12 5-22 16-25 9-2 17 2 24 13l16 25c5 9 16 11 23 5 8-7 7-18-1-26l-34-35c-9-10-9-23-1-31 8-8 20-5 27 6l30 44-1-93c0-13 8-22 20-22 11 0 19 9 19 22l1 92 27-76c4-12 14-18 25-14 11 4 15 16 11 28l-38 114c-9 31-34 49-69 49-20 0-38-6-53-18" />
       <path d="M505 248 457 166c-6-11-3-24 8-29 10-5 21 2 26 13l39 90" />
       <path d="M472 257c15 31 38 48 67 50" />
       <path d="M520 284c-1 25-18 42-45 40" />
       <path d="M492 326c10 10 25 15 45 14" />
     </g>
-    <g stroke="url(#gold)" stroke-width="3.9">
+    <g stroke="url(#silver)" stroke-width="3.9">
       <path d="M475 343v-31c-16-10-26-27-27-47-1-12 5-22 16-25 9-2 17 2 24 13l16 25c5 9 16 11 23 5 8-7 7-18-1-26l-34-35c-9-10-9-23-1-31 8-8 20-5 27 6l30 44-1-93c0-13 8-22 20-22 11 0 19 9 19 22l1 92 27-76c4-12 14-18 25-14 11 4 15 16 11 28l-38 114c-9 31-34 49-69 49-20 0-38-6-53-18" />
       <path d="M505 248 457 166c-6-11-3-24 8-29 10-5 21 2 26 13l39 90" />
       <path d="M472 257c15 31 38 48 67 50" />
@@ -72,5 +72,5 @@
   </g>
 
   <circle cx="512" cy="410" r="18" fill="url(#orb)" filter="url(#orb-lift)" />
-  <path d="M502 406c7-10 21-13 31-3" fill="none" stroke="#fff3c4" stroke-linecap="round" stroke-width="2.2" opacity="0.76" />
+  <path d="M502 406c7-10 21-13 31-3" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-width="2.2" opacity="0.76" />
 </svg>
