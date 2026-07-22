@@ -191,6 +191,22 @@ textarea:focus-visible {
     @apply border border-gold-200/70 bg-paper-light/80 transition-colors hover:border-gold-500 hover:bg-white dark:border-gold-800/50 dark:bg-white/5 dark:hover:border-gold-500/70 dark:hover:bg-white/10;
   }
 
+  .nav-tabs {
+    @apply relative grid w-[min(100%,24rem)] grid-cols-2 gap-1 overflow-hidden border border-gold-200 bg-paper-light p-1 dark:border-gold-800/50 dark:bg-deep-950;
+  }
+
+  .nav-swish {
+    @apply pointer-events-none absolute bottom-1 left-1 top-1 bg-gold-600 shadow-sm dark:bg-gold-300;
+    width: calc((100% - 0.75rem) / 2);
+    transition:
+      transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      background-color 160ms ease;
+  }
+
+  .nav-tabs[data-active="vocabulary"] .nav-swish {
+    transform: translateX(calc(100% + 0.25rem));
+  }
+
   .nav-button {
     @apply inline-flex items-center gap-2 border border-transparent px-3 py-2 text-sm font-bold text-ink-700 hover:border-gold-300 hover:bg-gold-50 hover:text-ink-950 active:bg-gold-700 active:text-white dark:text-ink-50/75 dark:hover:border-gold-500/50 dark:hover:bg-white/10 dark:hover:text-white;
     transition:
@@ -199,8 +215,12 @@ textarea:focus-visible {
       color 160ms ease;
   }
 
+  .nav-tab-button {
+    @apply relative z-10 min-h-11 justify-center px-5 text-center;
+  }
+
   .nav-button.active {
-    @apply border-gold-700 bg-gold-600 text-white hover:bg-gold-700 dark:border-gold-300 dark:bg-gold-300 dark:text-deep-950 dark:hover:bg-gold-200;
+    @apply border-transparent bg-transparent text-white hover:border-transparent hover:bg-transparent hover:text-white dark:text-deep-950 dark:hover:text-deep-950;
   }
 
   .button-primary {

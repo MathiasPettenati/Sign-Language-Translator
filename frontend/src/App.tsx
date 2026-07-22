@@ -2,7 +2,6 @@ import { BookOpen, Languages } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { DEFAULT_RECOGNITION_SETTINGS, LOCAL_STORAGE_KEYS } from "./constants/vocabulary";
-import { BrandMark } from "./components/BrandMark";
 import { EntryExperience } from "./components/EntryExperience";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { RecognizerPage } from "./pages/RecognizerPage";
@@ -56,19 +55,13 @@ export function App() {
   return (
     <div className="app-shell min-h-screen bg-app text-ink-900 dark:bg-deep-950 dark:text-white">
       <header className="sticky top-0 z-20 border-b border-gold-300/60 bg-paper-light/90 text-ink-950 backdrop-blur dark:border-gold-700/40 dark:bg-deep-950/90 dark:text-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <BrandMark className="h-12 w-12 shrink-0" title="Handspeak logo" />
-            <div className="sr-only">
-              <p className="text-xs font-bold uppercase text-gold-700 dark:text-gold-200">Handspeak</p>
-              <p className="text-sm font-bold text-ink-950 dark:text-white">Live Sign Translator</p>
-            </div>
-          </div>
-          <nav className="flex items-center gap-2" aria-label="Main navigation">
+        <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-3 sm:px-6 lg:px-8">
+          <nav className="nav-tabs" data-active={page} aria-label="Main navigation">
+            <span className="nav-swish" aria-hidden="true" />
             <button
               type="button"
               onClick={() => navigate("recognizer")}
-              className={`nav-button ${page === "recognizer" ? "active" : ""}`}
+              className={`nav-button nav-tab-button ${page === "recognizer" ? "active" : ""}`}
             >
               <Languages className="h-4 w-4" aria-hidden="true" />
               Translate
@@ -76,7 +69,7 @@ export function App() {
             <button
               type="button"
               onClick={() => navigate("vocabulary")}
-              className={`nav-button ${page === "vocabulary" ? "active" : ""}`}
+              className={`nav-button nav-tab-button ${page === "vocabulary" ? "active" : ""}`}
             >
               <BookOpen className="h-4 w-4" aria-hidden="true" />
               Words
