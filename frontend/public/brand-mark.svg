@@ -2,35 +2,35 @@
   <defs>
     <linearGradient id="silver" x1="446" x2="586" y1="120" y2="378" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#ffffff" />
-      <stop offset="0.18" stop-color="#d7dde6" />
-      <stop offset="0.46" stop-color="#7d8795" />
-      <stop offset="0.73" stop-color="#c1cad6" />
-      <stop offset="1" stop-color="#f8fafc" />
+      <stop offset="0.18" stop-color="#dedede" />
+      <stop offset="0.46" stop-color="#8f8f8f" />
+      <stop offset="0.73" stop-color="#c8c8c8" />
+      <stop offset="1" stop-color="#f7f7f7" />
     </linearGradient>
     <linearGradient id="silver-shadow" x1="438" x2="593" y1="121" y2="379" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#f8fafc" />
-      <stop offset="0.5" stop-color="#475569" />
-      <stop offset="1" stop-color="#d7dde6" />
+      <stop offset="0" stop-color="#f7f7f7" />
+      <stop offset="0.5" stop-color="#666666" />
+      <stop offset="1" stop-color="#dedede" />
     </linearGradient>
     <linearGradient id="signal" x1="364" x2="660" y1="210" y2="410" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#cbd5e1" stop-opacity="0" />
-      <stop offset="0.22" stop-color="#cbd5e1" stop-opacity="0.62" />
-      <stop offset="0.5" stop-color="#cbd5e1" stop-opacity="0.18" />
-      <stop offset="0.78" stop-color="#cbd5e1" stop-opacity="0.62" />
-      <stop offset="1" stop-color="#cbd5e1" stop-opacity="0" />
+      <stop offset="0" stop-color="#c0c0c0" stop-opacity="0" />
+      <stop offset="0.22" stop-color="#c0c0c0" stop-opacity="0.62" />
+      <stop offset="0.5" stop-color="#c0c0c0" stop-opacity="0.18" />
+      <stop offset="0.78" stop-color="#c0c0c0" stop-opacity="0.62" />
+      <stop offset="1" stop-color="#c0c0c0" stop-opacity="0" />
     </linearGradient>
     <radialGradient id="orb" cx="35%" cy="28%" r="70%">
       <stop offset="0" stop-color="#ffffff" />
-      <stop offset="0.28" stop-color="#d7dde6" />
-      <stop offset="0.62" stop-color="#64748b" />
-      <stop offset="1" stop-color="#eef2f7" />
+      <stop offset="0.28" stop-color="#dedede" />
+      <stop offset="0.62" stop-color="#9a9a9a" />
+      <stop offset="1" stop-color="#eeeeee" />
     </radialGradient>
     <filter id="hand-lift" x="-25%" y="-25%" width="150%" height="150%">
-      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#1e293b" flood-opacity="0.34" />
+      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#4a4a4a" flood-opacity="0.34" />
       <feDropShadow dx="0" dy="-1" stdDeviation="0.8" flood-color="#ffffff" flood-opacity="0.58" />
     </filter>
     <filter id="orb-lift" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="3" stdDeviation="2.4" flood-color="#1e293b" flood-opacity="0.36" />
+      <feDropShadow dx="0" dy="3" stdDeviation="2.4" flood-color="#4a4a4a" flood-opacity="0.36" />
     </filter>
   </defs>
 
@@ -48,7 +48,7 @@
   </g>
 
   <g filter="url(#hand-lift)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <g stroke="#475569" stroke-width="10.5" opacity="0.2">
+    <g stroke="#666666" stroke-width="10.5" opacity="0.2">
       <path d="M475 343v-31c-16-10-26-27-27-47-1-12 5-22 16-25 9-2 17 2 24 13l16 25c5 9 16 11 23 5 8-7 7-18-1-26l-34-35c-9-10-9-23-1-31 8-8 20-5 27 6l30 44-1-93c0-13 8-22 20-22 11 0 19 9 19 22l1 92 27-76c4-12 14-18 25-14 11 4 15 16 11 28l-38 114c-9 31-34 49-69 49-20 0-38-6-53-18" />
       <path d="M505 248 457 166c-6-11-3-24 8-29 10-5 21 2 26 13l39 90" />
       <path d="M472 257c15 31 38 48 67 50" />

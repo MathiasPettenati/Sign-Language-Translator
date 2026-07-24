@@ -34,9 +34,9 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", settings.darkMode);
+    document.documentElement.classList.remove("dark");
     document.documentElement.setAttribute("data-motion", settings.reducedMotion ? "reduced" : "full");
-  }, [settings.darkMode, settings.reducedMotion]);
+  }, [settings.reducedMotion]);
 
   const navigate = (nextPage: Page) => {
     window.location.hash = nextPage === "vocabulary" ? "vocabulary" : "";
@@ -53,8 +53,8 @@ export function App() {
   }
 
   return (
-    <div className="app-shell min-h-screen bg-app text-ink-900 dark:bg-deep-950 dark:text-white">
-      <header className="sticky top-0 z-20 border-b border-gold-300/60 bg-paper-light/90 text-ink-950 backdrop-blur dark:border-gold-700/40 dark:bg-deep-950/90 dark:text-white">
+    <div className="app-shell min-h-screen bg-app text-ink-900">
+      <header className="sticky top-0 z-20 border-b border-gold-300/60 bg-paper-light/90 text-ink-950 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-3 sm:px-6 lg:px-8">
           <nav className="nav-tabs" data-active={page} aria-label="Main navigation">
             <span className="nav-swish" aria-hidden="true" />

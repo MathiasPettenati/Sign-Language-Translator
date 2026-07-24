@@ -23,8 +23,8 @@ export function CameraStage({
   const mirroredClass = mirrored ? "scale-x-[-1]" : "";
 
   return (
-    <section className="overflow-hidden border border-gold-300/70 bg-deep-950 shadow-panel dark:border-gold-800/50">
-      <div className="relative aspect-video min-h-[260px] w-full bg-deep-950">
+    <section className="overflow-hidden border border-gold-300/70 bg-paper-light shadow-panel">
+      <div className="relative aspect-video min-h-[260px] w-full bg-gold-100">
         <video
           ref={videoRef}
           className={`absolute inset-0 h-full w-full object-cover ${mirroredClass}`}
@@ -36,14 +36,14 @@ export function CameraStage({
           aria-label="Hand landmark overlay"
         />
         {!isActive ? (
-          <div className="absolute inset-0 grid place-items-center bg-deep-950/90 p-6 text-center text-white">
+          <div className="absolute inset-0 grid place-items-center bg-gold-100/95 p-6 text-center text-ink-950">
             <div className="max-w-sm space-y-4">
-              <Camera className="mx-auto h-10 w-10 text-ink-200" aria-hidden="true" />
+              <Camera className="mx-auto h-10 w-10 text-ink-600" aria-hidden="true" />
               <div>
                 <p className="text-lg font-semibold">
                   {isStarting ? "Starting camera" : "Camera inactive"}
                 </p>
-                <p className="mt-1 text-sm text-ink-50/70">
+                <p className="mt-1 text-sm text-ink-600">
                   Ready for live signing.
                 </p>
               </div>
@@ -64,10 +64,10 @@ export function CameraStage({
           </div>
         ) : null}
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gold-700/30 bg-deep-950 p-3 text-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gold-300 bg-paper-light p-3 text-ink-900">
         <div className="flex items-center gap-2 text-sm">
           <span
-            className={`h-2.5 w-2.5 ${isActive ? "bg-ink-50" : "bg-ink-50/35"}`}
+            className={`h-2.5 w-2.5 ${isActive ? "bg-ink-700" : "bg-ink-300"}`}
             aria-hidden="true"
           />
           {isActive ? "Camera active" : "Camera stopped"}
@@ -77,7 +77,7 @@ export function CameraStage({
             type="button"
             onClick={onStart}
             disabled={isActive || isStarting}
-            className="inline-flex items-center justify-center gap-2 border border-gold-300/35 px-3 py-2 text-sm font-bold text-ink-50 transition-colors hover:border-gold-300 hover:bg-gold-300/10 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 border border-gold-300 bg-paper-light px-3 py-2 text-sm font-bold text-ink-800 transition-colors hover:border-gold-600 hover:bg-gold-100 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Camera className="h-4 w-4" aria-hidden="true" />
             Start
@@ -86,7 +86,7 @@ export function CameraStage({
             type="button"
             onClick={onStop}
             disabled={!isActive && !isStarting}
-            className="inline-flex items-center justify-center gap-2 border border-gold-300 bg-gold-300 px-3 py-2 text-sm font-bold text-deep-950 transition-colors hover:bg-gold-200 disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 border border-gold-500 bg-gold-500 px-3 py-2 text-sm font-bold text-white transition-colors hover:bg-gold-600 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <CameraOff className="h-4 w-4" aria-hidden="true" />
             Stop

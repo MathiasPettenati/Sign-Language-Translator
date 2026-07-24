@@ -128,9 +128,9 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
     );
 
     const ambient = new THREE.AmbientLight(0xffffff, 0.7);
-    const key = new THREE.DirectionalLight(0xf8fafc, 3.35);
+    const key = new THREE.DirectionalLight(0xffffff, 3.35);
     key.position.set(-2.8, 4, 5);
-    const rim = new THREE.PointLight(0xcbd5e1, 3.8, 10);
+    const rim = new THREE.PointLight(0xc0c0c0, 3.8, 10);
     rim.position.set(2.8, 1.5, 2.8);
     scene.add(ambient, key, rim);
 
@@ -227,6 +227,7 @@ export function EntryExperience({ reducedMotion, onEnter }: EntryExperienceProps
 }
 
 function normalizeGlassesModel(model: THREE.Object3D): THREE.Group {
+  applySilverMaterials(model);
   model.updateMatrixWorld(true);
 
   const box = new THREE.Box3().setFromObject(model);
@@ -245,24 +246,38 @@ function normalizeGlassesModel(model: THREE.Object3D): THREE.Group {
   return pivot;
 }
 
+function applySilverMaterials(model: THREE.Object3D): void {
+  model.traverse((child) => {
+    if (child instanceof THREE.Mesh) {
+      const materials = Array.isArray(child.material) ? child.material : [child.material];
+      materials.forEach((material) => material.dispose());
+      child.material = new THREE.MeshStandardMaterial({
+        color: 0xc0c0c0,
+        metalness: 0.86,
+        roughness: 0.26,
+      });
+    }
+  });
+}
+
 function createFallbackGlasses(): THREE.Group {
   const group = new THREE.Group();
 
   const frameMaterial = new THREE.MeshStandardMaterial({
-    color: 0xcbd5e1,
+    color: 0xc0c0c0,
     metalness: 0.9,
     roughness: 0.24,
   });
   const lensMaterial = new THREE.MeshPhysicalMaterial({
-    color: 0x11151c,
+    color: 0xa8a8a8,
     metalness: 0.08,
     roughness: 0.12,
     transparent: true,
-    opacity: 0.58,
+    opacity: 0.42,
     side: THREE.DoubleSide,
   });
   const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0xf8fafc,
+    color: 0xffffff,
     transparent: true,
     opacity: 0.36,
   });
@@ -409,7 +424,7 @@ function createAtmosphere(): THREE.Points {
   return new THREE.Points(
     geometry,
     new THREE.PointsMaterial({
-      color: 0xcbd5e1,
+      color: 0xc0c0c0,
       size: 0.018,
       transparent: true,
       opacity: 0.12,

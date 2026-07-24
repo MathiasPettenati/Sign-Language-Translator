@@ -1,4 +1,4 @@
-import { Gauge, Mic2, Moon, SlidersHorizontal, Sun } from "lucide-react";
+import { Gauge, Mic2, SlidersHorizontal } from "lucide-react";
 
 import { useSpeechVoices } from "../hooks/useSpeechVoices";
 import type { PreferredHand, RecognitionMode, RecognitionSettings } from "../types/recognition";
@@ -190,21 +190,6 @@ export function SettingsPanel({ settings, onChange }: SettingsPanelProps) {
                 onChange={(event) => update("muted", event.target.checked)}
               />
               <span>Mute speech</span>
-            </label>
-            <label className="check-row">
-              <input
-                type="checkbox"
-                checked={settings.darkMode}
-                onChange={(event) => update("darkMode", event.target.checked)}
-              />
-              <span className="inline-flex items-center gap-2">
-                {settings.darkMode ? (
-                  <Moon className="h-4 w-4" aria-hidden="true" />
-                ) : (
-                  <Sun className="h-4 w-4" aria-hidden="true" />
-                )}
-                Dark mode
-              </span>
             </label>
             <label className="check-row">
               <input
