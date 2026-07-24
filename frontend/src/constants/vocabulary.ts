@@ -61,6 +61,10 @@ export const VOCABULARY_ENTRIES: VocabularyEntry[] = [
   })),
 ];
 
+export const SPEAKABLE_VOCABULARY_ENTRIES: VocabularyEntry[] = VOCABULARY_ENTRIES.filter(
+  (entry) => entry.category !== "neutral",
+);
+
 export const DEFAULT_RECOGNITION_SETTINGS: RecognitionSettings = {
   confidenceThreshold: 0.75,
   stabilizationMs: 650,
@@ -85,4 +89,5 @@ export const LOCAL_STORAGE_KEYS = {
   settings: "handspeak:settings",
   sentence: "handspeak:sentence",
   history: "handspeak:history",
+  trainedProfiles: "handspeak:trained-profiles",
 } as const;

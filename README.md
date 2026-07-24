@@ -12,8 +12,11 @@ isolated signs and practical fingerspelling hand shapes.
 
 - React, TypeScript, Vite, Tailwind CSS, and Lucide icons.
 - MediaPipe Hand Landmarker integration running in the browser.
+- MIT-licensed Kaggle ASL Signs TFLite model for 250 isolated ASL signs.
 - Optional MediaPipe Gesture Recognizer model loading from `frontend/public/models/gesture_recognizer.task`.
 - Rule-based static prototype recognition for selected signs and hand shapes.
+- Free local camera training for any known word, stored in browser storage.
+- Full known-vocabulary word bank for sentence building and speech output.
 - Prediction buffering, confidence thresholding, stabilization timing, neutral reset, and cooldown.
 - Webcam landmark overlay with hand boxes, handedness labels, and confidence display.
 - Sentence builder with edit, speak, replay, stop, undo, and clear controls.
@@ -48,12 +51,24 @@ npm.cmd run test:e2e
 Generated or trained model files belong in `frontend/public/models/`.
 
 - `labels.json`: label map used by the app and training pipeline.
+- `asl_signs_250.tflite`: free MIT-licensed 250-class isolated-sign model mirrored from `sign/kaggle-asl-signs-1st-place`.
+- `asl_signs_250_labels.json`: label map for the 250-class ASL Signs model.
 - `gesture_recognizer.task`: optional MediaPipe Gesture Recognizer model.
 - `sign_classifier.tflite`: TensorFlow Lite export from `training/export_model.py`.
 
-The Stage 1/2 app loads MediaPipe's public Hand Landmarker model and processes webcam frames
-locally in the browser. If no custom gesture model exists, it uses the local prototype classifier
-instead of pretending a trained sign model is available.
+The app loads MediaPipe's public hand and holistic landmark models and processes webcam frames
+locally in the browser. The broad isolated-sign path uses the MIT-licensed Kaggle ASL Signs model
+from Hugging Face (`https://huggingface.co/sign/kaggle-asl-signs-1st-place`), which packages the
+winning Kaggle ASL Signs entry and a 250-sign vocabulary. If that TFLite model cannot load or is
+not confident enough, recognition falls back to an optional custom gesture model, local user-trained
+word profiles, and built-in hand-shape rules.
+
+## External Sources
+
+- ASL Signs 250 TFLite model: https://huggingface.co/sign/kaggle-asl-signs-1st-place
+- Model card / README: https://huggingface.co/sign/kaggle-asl-signs-1st-place/blob/main/README.md
+- 250-sign label map: https://huggingface.co/sign/kaggle-asl-signs-1st-place/blob/main/sign_to_prediction_index_map.json
+- Local source note: `frontend/public/models/asl_signs_250_SOURCE.md`
 
 ## Dataset Collection
 

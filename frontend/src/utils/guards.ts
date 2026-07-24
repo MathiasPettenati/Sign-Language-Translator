@@ -54,7 +54,10 @@ export function isRecognitionHistory(value: unknown): value is RecognitionHistor
       typeof item.id === "string" &&
       typeof item.label === "string" &&
       typeof item.confidence === "number" &&
-      (item.source === "prototype" || item.source === "mediapipe-model") &&
+      (item.source === "prototype" ||
+        item.source === "mediapipe-model" ||
+        item.source === "asl-signs-model" ||
+        item.source === "user-trained") &&
       typeof item.createdAt === "string",
   );
 }

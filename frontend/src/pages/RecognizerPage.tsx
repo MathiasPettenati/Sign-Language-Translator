@@ -1,4 +1,5 @@
 import { Languages, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { useMemo, useState } from "react";
 
 import { BrandMark } from "../components/BrandMark";
 import { CameraStage } from "../components/CameraStage";
@@ -8,6 +9,8 @@ import { HistoryPanel } from "../components/HistoryPanel";
 import { ModelStatus } from "../components/ModelStatus";
 import { SentenceBuilder } from "../components/SentenceBuilder";
 import { SettingsPanel } from "../components/SettingsPanel";
+import { TrainingPanel } from "../components/TrainingPanel";
+import { SPEAKABLE_VOCABULARY_ENTRIES } from "../constants/vocabulary";
 import { useRecognizer } from "../hooks/useRecognizer";
 import type { RecognitionSettings } from "../types/recognition";
 
@@ -18,10 +21,38 @@ type RecognizerPageProps = {
 
 export function RecognizerPage({ settings, onSettingsChange }: RecognizerPageProps) {
   const recognizer = useRecognizer(settings);
+  const trainingLabels = useMemo(
+    () => SPEAKABLE_VOCABULARY_ENTRIES.map((entry) => entry.label),
+    [],
+  );
+  const [trainingLabel, setTrainingLabel] = useState(trainingLabels[0] ?? "Hello");
+  const [trainingMessage, setTrainingMessage] = useState("");
   const handsDetected = recognizer.latestFrame?.hands.length ?? 0;
-  const warnings = recognizer.latestFrame?.modelWarnings ?? [];
+  const warnings = [
+    ...new Set([...(recognizer.latestFrame?.modelWarnings ?? []), ...recognizer.modelWarnings]),
+  ];
   const visibleSign = recognizer.recognition.label ?? recognizer.currentPrediction?.label ?? "Not sure";
   const confidence = recognizer.recognition.confidence || recognizer.currentPrediction?.confidence || 0;
+  const selectedTrainingProfile = recognizer.trainedProfiles.find(
+    (profile) => profile.label === trainingLabel,
+  );
+  const totalTrainingSamples = recognizer.trainedProfiles.reduce(
+    (sum, profile) => sum + profile.samples,
+    0,
+  );
+
+  const captureTrainingSample = () => {
+    if (recognizer.captureTrainingSample(trainingLabel)) {
+      setTrainingMessage("Captured from recent camera motion.");
+    } else {
+      setTrainingMessage("Start the camera and hold the sign in frame.");
+    }
+  };
+
+  const removeTrainingProfile = () => {
+    recognizer.removeTrainingProfile(trainingLabel);
+    setTrainingMessage("Local samples cleared for this word.");
+  };
 
   return (
     <main className="newspaper-page space-y-5">
@@ -122,6 +153,19 @@ export function RecognizerPage({ settings, onSettingsChange }: RecognizerPagePro
             state={recognizer.modelState}
             handsDetected={handsDetected}
             warnings={warnings}
+          />
+          <TrainingPanel
+            labels={trainingLabels}
+            selectedLabel={trainingLabel}
+            sampleCount={selectedTrainingProfile?.samples ?? 0}
+            totalSamples={totalTrainingSamples}
+            trainedLabelCount={recognizer.trainedProfiles.length}
+            cameraActive={recognizer.cameraStatus === "active"}
+            hasFrame={Boolean(recognizer.latestFrame?.hands.length)}
+            message={trainingMessage}
+            onSelectedLabelChange={setTrainingLabel}
+            onCapture={captureTrainingSample}
+            onRemoveSelected={removeTrainingProfile}
           />
           <SettingsPanel settings={settings} onChange={onSettingsChange} />
         </div>

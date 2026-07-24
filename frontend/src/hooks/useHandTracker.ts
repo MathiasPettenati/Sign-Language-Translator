@@ -15,7 +15,9 @@ type UseHandTrackerOptions = {
 
 const INITIAL_MODEL_STATE: ModelLoadState = {
   handLandmarker: "idle",
+  holisticLandmarker: "idle",
   gestureRecognizer: "idle",
+  aslSignsModel: "idle",
   message: "MediaPipe is not loaded yet.",
 };
 

@@ -31,7 +31,21 @@ export type HandLandmarkSet = {
   boundingBox: BoundingBox;
 };
 
-export type PredictionSource = "prototype" | "mediapipe-model";
+export type HolisticLandmarkFrame = {
+  landmarks: Landmark[];
+  detectedParts: {
+    face: boolean;
+    pose: boolean;
+    leftHand: boolean;
+    rightHand: boolean;
+  };
+};
+
+export type PredictionSource =
+  | "prototype"
+  | "mediapipe-model"
+  | "asl-signs-model"
+  | "user-trained";
 
 export type SignPrediction = {
   label: string;
@@ -42,6 +56,7 @@ export type SignPrediction = {
 
 export type FrameAnalysis = {
   hands: HandLandmarkSet[];
+  holisticLandmarks: HolisticLandmarkFrame | null;
   gesturePrediction: SignPrediction | null;
   timestampMs: number;
   modelWarnings: string[];
@@ -79,9 +94,13 @@ export type RecognitionSettings = {
   reducedMotion: boolean;
 };
 
+export type ModelComponentStatus = "idle" | "loading" | "ready" | "missing" | "error";
+
 export type ModelLoadState = {
-  handLandmarker: "idle" | "loading" | "ready" | "error";
-  gestureRecognizer: "idle" | "loading" | "ready" | "missing" | "error";
+  handLandmarker: ModelComponentStatus;
+  holisticLandmarker: ModelComponentStatus;
+  gestureRecognizer: ModelComponentStatus;
+  aslSignsModel: ModelComponentStatus;
   message: string;
 };
 

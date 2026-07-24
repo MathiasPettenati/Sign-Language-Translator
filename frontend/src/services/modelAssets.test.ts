@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isUsableGestureModelResponse } from "./modelAssets";
+import { isUsableAslSignsModelResponse, isUsableGestureModelResponse } from "./modelAssets";
 
 describe("model asset detection", () => {
   it("rejects Vite HTML fallback responses for missing gesture models", () => {
@@ -25,5 +25,25 @@ describe("model asset detection", () => {
     });
 
     expect(isUsableGestureModelResponse(response)).toBe(true);
+  });
+
+  it("requires the ASL Signs model to be large enough to be plausible", () => {
+    const tinyResponse = new Response(null, {
+      status: 200,
+      headers: {
+        "content-length": "250000",
+        "content-type": "application/octet-stream",
+      },
+    });
+    const modelResponse = new Response(null, {
+      status: 200,
+      headers: {
+        "content-length": "11242036",
+        "content-type": "application/octet-stream",
+      },
+    });
+
+    expect(isUsableAslSignsModelResponse(tinyResponse)).toBe(false);
+    expect(isUsableAslSignsModelResponse(modelResponse)).toBe(true);
   });
 });

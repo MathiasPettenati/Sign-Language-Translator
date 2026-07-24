@@ -990,7 +990,7 @@ const labelPayload = {
   labels: ["none", ...targetVocabulary, ...fingerspellingLabels],
   prototypeRuleLabels,
   notes:
-    "The shipped translator includes a rule-based static prototype for a subset of labels. The full vocabulary is available for translation display and future custom model expansion.",
+    "The shipped translator includes a full word bank for sentence building and speech. Camera auto-recognition uses a trained gesture_recognizer.task when available, local user-trained word profiles, and built-in hand-shape rules.",
 };
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));

@@ -82,7 +82,7 @@ export function App() {
         {page === "recognizer" ? (
           <RecognizerPage settings={settings} onSettingsChange={setSettings} />
         ) : (
-          <VocabularyPage />
+          <VocabularyPage settings={settings} />
         )}
       </div>
     </div>

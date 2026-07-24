@@ -18,7 +18,7 @@ describe("App", () => {
 
     await user.click(screen.getByRole("button", { name: /enter handspeak translator/i }));
 
-    expect(await screen.findByText("Live Sign Translator")).toBeInTheDocument();
+    expect(await screen.findByText("Signs In. Speech Out.")).toBeInTheDocument();
     expect(screen.getByText("Translation desk")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /start camera/i })).toBeInTheDocument();
   });
@@ -43,5 +43,16 @@ describe("App", () => {
     expect(screen.getByText("Translation vocabulary")).toBeInTheDocument();
     expect(screen.getByText("Hello")).toBeInTheDocument();
     expect(screen.getByText("Thank you")).toBeInTheDocument();
+  });
+
+  it("adds known vocabulary words to the translated sentence", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole("button", { name: /enter handspeak translator/i }));
+    await user.click(screen.getByRole("button", { name: /words/i }));
+    await user.click(screen.getByRole("button", { name: /add hello to sentence/i }));
+
+    expect(screen.getByLabelText("Editable generated sentence")).toHaveValue("Hello");
   });
 });
